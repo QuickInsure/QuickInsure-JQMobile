@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>QuickInsure</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="vendor/jquerymobile/jquery.mobile-1.4.5.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<link rel="stylesheet" href="css/custom.css" />
+
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
+			</div>
+
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
+				<a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
+				<h1 class="wow fadeIn" data-wow-delay='0.4s'>QuickInsure</h1>
+
+				<ul data-role="nd2tabs" data-swipe="true">
+					<li data-tab="account" data-tab-active="true">Account</li>
+					<li data-tab="general">General</li>
+					<li data-tab="motor">Motor</li>
+				</ul>
+			</div>
+
+			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
+				
+				<div data-role="nd2tab" data-tab="account">
+					<ul data-role="listview" data-icon="false">
+											<li data-role="list-divider">
+													Friends
+												</li>
+												<li>
+													<a href="#">
+														<img src="//lorempixel.com/150/150/people/1/" class="ui-thumbnail ui-thumbnail-circular" />
+														<h2>Ethel Chancy</h2>
+														<p>ehtel.chancy@example.com</p>
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<img src="//lorempixel.com/150/150/people/2/" class="ui-thumbnail ui-thumbnail-circular" />
+														<h2>Lorean Gainer</h2>
+														<p>lorean87@mail.com</p>
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<img src="//lorempixel.com/150/150/people/3/" class="ui-thumbnail ui-thumbnail-circular" />
+														<h2>Juliet Gieseke</h2>
+														<p>flowerpower69@rainbow.com</p>
+													</a>
+												</li>
+											</ul>
+				</div>
+
+				<div data-role="nd2tab" data-tab="general">
+					<ul data-role="listview" data-icon="false">
+						<li data-role="list-divider">
+							Work
+						</li>
+						<li>
+							<a href="#">
+								<img src="//lorempixel.com/150/150/people/6/" class="ui-thumbnail ui-thumbnail-circular" />
+								<h2>Gale Cecil</h2>
+								<p>gale.cecil@company.com</p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="//lorempixel.com/150/150/people/5/" class="ui-thumbnail ui-thumbnail-circular" />
+								<h2>Bernard Desrosier</h2>
+								<p>bernhard.desrosier@company.com</p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="//lorempixel.com/150/150/people/7/" class="ui-thumbnail ui-thumbnail-circular" />
+								<h2>Emerita Scholl</h2>
+								<p>emerita.scholl@company.com</p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="//lorempixel.com/150/150/people/8/" class="ui-thumbnail ui-thumbnail-circular" />
+								<h2>Elmer Eyer</h2>
+								<p>elmer.eyer@company.com</p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="//lorempixel.com/150/150/people/9/" class="ui-thumbnail ui-thumbnail-circular" />
+								<h2>Shona Mckibben</h2>
+								<p>shona.mckibben@company.com</p>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="//lorempixel.com/150/150/people/10/" class="ui-thumbnail ui-thumbnail-circular" />
+								<h2>Hilma Mercer</h2>
+								<p>hilma.mercer@company.com</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div data-role="nd2tab" data-tab="motor">
+					<nd2-include data-src="fragments/car.html"></nd2-include>
+				</div>
+
+			</div>
+		</div>
+
+		<script src="js/jquery-2.2.1.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="vendor/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+		<script src="vendor/waves/waves.min.js"></script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="js/nativedroid2.js"></script>
+		<script src="nd2settings.js"></script>
+		<!--<script src="js/custom.js"></script>-->
+	</body>
+</html>
