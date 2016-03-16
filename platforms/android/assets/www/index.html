@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>QuickInsure</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="vendor/jquerymobile/jquery.mobile-1.4.5.min.css" />
+		<link rel="stylesheet" href="vendor/waves/waves.min.css" />
+		<link rel="stylesheet" href="vendor/wow/animate.css" />
+		<link rel="stylesheet" href="css/nativedroid2.css" />
+		<link rel="stylesheet" href="css/custom.css" />
+
+		<meta name="mobile-web-app-capable" content="yes">
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+	</head>
+	<body>
+		<div data-role="page" id="login">
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
+				<h1 class="wow fadeIn" data-wow-delay='0.4s'>QuickInsure</h1>
+
+				<ul data-role="nd2tabs" data-swipe="true">
+					<li data-tab="login" data-tab-active="true">Login</li>
+					<li data-tab="register">Register</li>
+				</ul>
+			</div>
+
+			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
+
+				<div data-role="nd2tab" data-tab="login">
+					<form id="loginForm" name="loginForm" data-ajax="false" data-module="user" data-action="login" data-redirecturl="#dashboard">
+						<div class="row">
+			                <div class="col-xs-12 col-sm-6 col-md-4">
+			                	<div class="box">
+			                		<label for="username">Username:</label>
+			                		<input type="text" name="username" id="username" value="" data-clear-btn="true" class="required" placeholder="Username">
+
+			                		<label for="password">Password:</label>
+			                		<input type="password" name="password" id="password" value="" data-clear-btn="true" class="required" placeholder="Password" autocomplete="off">
+			                	</div>
+
+								<div class="box">
+									<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+			                            <input type="radio" name="loginType" id="mobile" value="mobile" checked="checked">
+			                            <label for="mobile">MOBILE</label>
+			                            <input type="radio" name="loginType" id="aadhar" value="aadhar">
+			                            <label for="aadhar">AADHAR</label>
+			                            <input type="radio" name="loginType" id="email" value="email">
+			                            <label for="email">EMAIL</label>
+			                            <input type="radio" name="loginType" id="gmail" value="gmail">
+			                            <label for="gmail">GMAIL</label>
+			                        </fieldset>
+			                    </div>
+			                </div>
+			            </div>
+
+						<div class="row">
+			                <div class="col-xs-12 col-sm-6 col-md-4">
+			                	<button class="ui-btn">Submit</button>
+			                </div>
+			            </div>
+			        </form>
+				</div>
+
+				<div data-role="nd2tab" data-tab="register">
+					<form>
+						<div class="row">
+			                <div class="col-xs-12 col-sm-6 col-md-4">
+			                	<div class="box">
+			                		<label for="name">Name:</label>
+			                		<input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="Name">
+
+			                		<label for="mobile">Mobile:</label>
+			                		<input type="tel" name="mobile" id="mobile" value="" data-clear-btn="true" placeholder="Mobile">
+			                		
+			                		<label for="email">Email:</label>
+			                		<input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="Email">
+			                		
+			                		<label for="aadhar">Aadhar:</label>
+			                		<input type="tel" name="aadhar" id="aadhar" value="" data-clear-btn="true" placeholder="Aadhar">
+			                	</div>
+
+								<div class="box">
+									<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+			                            <input type="radio" name="gender" id="male" value="male" checked="checked">
+			                            <label for="male">Male</label>
+			                            <input type="radio" name="gender" id="female" value="female">
+			                            <label for="female">Female</label>
+			                        </fieldset>
+			                    </div>
+			                </div>
+			            </div>
+
+						<div class="row">
+			                <div class="col-xs-12 col-sm-6 col-md-4">
+			                	<button class="ui-btn">Submit</button>
+			                </div>
+			            </div>
+			        </form>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="dashboard">
+			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+				<!-- <nd2-include data-src="fragments/bottom.sheet.html"></nd2-include> -->
+			</div>
+
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
+				<a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
+				<h1 class="wow fadeIn" data-wow-delay='0.4s'>QuickInsure</h1>
+
+				<ul data-role="nd2tabs" data-swipe="true">
+					<li data-tab="account" data-tab-active="true">Account</li>
+					<li data-tab="general">General</li>
+					<li data-tab="motor">Motor</li>
+				</ul>
+			</div>
+
+			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
+				
+				<div data-role="nd2tab" data-tab="account">
+				</div>
+
+				<div data-role="nd2tab" data-tab="general">
+				</div>
+
+				<div data-role="nd2tab" data-tab="motor">
+					<!-- <nd2-include data-src="fragments/car.html"></nd2-include> -->
+				</div>
+
+			</div>
+		</div>
+
+		<script src="js/jquery-2.2.1.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="vendor/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+		<script src="vendor/waves/waves.min.js"></script>
+		<script src="vendor/wow/wow.min.js"></script>
+		<script src="js/nativedroid2.js"></script>
+		<script src="nd2settings.js"></script>
+		<script src="js/fastclick.js"></script>
+		<script src="js/jquery.validate.min.js"></script>
+		<script src="js/custom.js"></script>
+	</body>
+</html>
