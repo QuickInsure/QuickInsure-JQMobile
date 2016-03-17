@@ -36,10 +36,6 @@ app.initialize();
 var networkErrorMessage = 'Network error! Please try again.';
 
 
-//Add contact validation rule to JQuery Validator
-jQuery.validator.addMethod("contact", function(value, element) {
-    return this.optional(element) || /^(\+[0-9]?[0-9]?-|\+[0-9]?[0-9]?|[0-9])?\d{10}$/.test(value);
-}, "Please enter valid contact no.");
 
 
 //Function to check for network connectivity
@@ -116,6 +112,7 @@ function submitForm(dataObject, formData, formID) {
     var redirecturl = dataObject.redirecturl;
 
     $.mobile.navigate(redirecturl);
+    return false;
     $.ajax({
         url: serverURL,
         data: {
@@ -214,7 +211,6 @@ function onUploadAMCScanSuccess(imageData) {
     $("#uploadBillAMCCopyPopup").popup("open");
 }
 function onFail(message) {
-    //alert('Failed because: ' + message);
     showMessage('Failed because: ' + message, null, null, null);
 }
 /*-----------Camera callback functions end-----------*/
@@ -300,7 +296,6 @@ $(document).on('pageinit', function() {
             reader.readAsDataURL(imageFile);
         }
         else {
-            //alert("Please select an image with size less than 2MB.");
             showMessage("Please select an image with size less than 2MB.", null, null, null);
         }
     });
@@ -327,7 +322,12 @@ $(document).on('pageinit', function() {
             && /[A-Z]/.test(value) // has a lowercase letter
             && /\d/.test(value) // has a digit
             && /[!,%,&,@,#,$,^,*,?,_,~]/.test(value) // has special character
-    });
+    }, "Password should consist of atleast 1 upper case, 1 lower case, 1 number & 1 special character");
+    
+    $.validator.addMethod("contact", function(value, element) {
+        return this.optional(element) || /^(\+[0-9]?[0-9]?-|\+[0-9]?[0-9]?|[0-9])?\d{10}$/.test(value);
+    }, "Please enter valid contact no.");
+    
     $("form").each(function(){
         $(this).validate({
             ignore: [],
@@ -346,7 +346,6 @@ $(document).on('pageinit', function() {
             },
             messages: {
                 Cust_Pass: {
-                    pwcheck: "Password should consist of atleast 1 upper case, 1 lower case, 1 number & 1 special character",
                     minlength: "Password should be minimum of 8 characters",
                     maxlength: "Password should be maximum of 20 characters"
                 }
@@ -363,6 +362,8 @@ $(document).on('pageinit', function() {
                 showMessage("Please enter all required fields!", null, null, null);
             },
             submitHandler: function(form) {
+                $.mobile.navigate($(form).data().redirecturl);
+                return false;
                 if (checkConnection()) {
                     $("input[type='date']").each(function(){
                         var dateArray = $(this).val().split("/");

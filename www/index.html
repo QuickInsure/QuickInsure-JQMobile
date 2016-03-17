@@ -31,73 +31,13 @@
 
 				<div data-role="nd2tab" data-tab="login">
 					<form id="loginForm" name="loginForm" data-ajax="false" data-module="user" data-action="login" data-redirecturl="#dashboard">
-						<div class="row">
-			                <div class="col-xs-12 col-sm-6 col-md-4">
-			                	<div class="box">
-			                		<label for="username">Username:</label>
-			                		<input type="text" name="username" id="username" value="" data-clear-btn="true" class="required" placeholder="Username">
-
-			                		<label for="password">Password:</label>
-			                		<input type="password" name="password" id="password" value="" data-clear-btn="true" class="required" placeholder="Password" autocomplete="off">
-			                	</div>
-
-								<div class="box">
-									<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-			                            <input type="radio" name="loginType" id="mobile" value="mobile" checked="checked">
-			                            <label for="mobile">MOBILE</label>
-			                            <input type="radio" name="loginType" id="aadhar" value="aadhar">
-			                            <label for="aadhar">AADHAR</label>
-			                            <input type="radio" name="loginType" id="email" value="email">
-			                            <label for="email">EMAIL</label>
-			                            <input type="radio" name="loginType" id="gmail" value="gmail">
-			                            <label for="gmail">GMAIL</label>
-			                        </fieldset>
-			                    </div>
-			                </div>
-			            </div>
-
-						<div class="row">
-			                <div class="col-xs-12 col-sm-6 col-md-4">
-			                	<button class="ui-btn">Submit</button>
-			                </div>
-			            </div>
+						<nd2-include data-src="fragments/login.html"></nd2-include>
 			        </form>
 				</div>
 
 				<div data-role="nd2tab" data-tab="register">
-					<form>
-						<div class="row">
-			                <div class="col-xs-12 col-sm-6 col-md-4">
-			                	<div class="box">
-			                		<label for="name">Name:</label>
-			                		<input type="text" name="name" id="name" value="" data-clear-btn="true" placeholder="Name">
-
-			                		<label for="mobile">Mobile:</label>
-			                		<input type="tel" name="mobile" id="mobile" value="" data-clear-btn="true" placeholder="Mobile">
-			                		
-			                		<label for="email">Email:</label>
-			                		<input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="Email">
-			                		
-			                		<label for="aadhar">Aadhar:</label>
-			                		<input type="tel" name="aadhar" id="aadhar" value="" data-clear-btn="true" placeholder="Aadhar">
-			                	</div>
-
-								<div class="box">
-									<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-			                            <input type="radio" name="gender" id="male" value="male" checked="checked">
-			                            <label for="male">Male</label>
-			                            <input type="radio" name="gender" id="female" value="female">
-			                            <label for="female">Female</label>
-			                        </fieldset>
-			                    </div>
-			                </div>
-			            </div>
-
-						<div class="row">
-			                <div class="col-xs-12 col-sm-6 col-md-4">
-			                	<button class="ui-btn">Submit</button>
-			                </div>
-			            </div>
+					<form id="registerForm" name="registerForm" data-ajax="false" data-module="user" data-action="register" data-redirecturl="#dashboard">
+						<nd2-include data-src="fragments/register.html"></nd2-include>
 			        </form>
 				</div>
 			</div>
@@ -114,21 +54,23 @@
 
 				<ul data-role="nd2tabs" data-swipe="true">
 					<li data-tab="account" data-tab-active="true">Account</li>
-					<li data-tab="general">General</li>
-					<li data-tab="motor">Motor</li>
+					<li data-tab="car">Car</li>
+					<li data-tab="bike">Bike</li>
 				</ul>
 			</div>
 
 			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
 				
 				<div data-role="nd2tab" data-tab="account">
+					<nd2-include data-src="fragments/account.html"></nd2-include>
 				</div>
 
-				<div data-role="nd2tab" data-tab="general">
-				</div>
-
-				<div data-role="nd2tab" data-tab="motor">
+				<div data-role="nd2tab" data-tab="car">
 					<nd2-include data-src="fragments/car.html"></nd2-include>
+				</div>
+
+				<div data-role="nd2tab" data-tab="bike">
+					<nd2-include data-src="fragments/bike.html"></nd2-include>
 				</div>
 
 			</div>
