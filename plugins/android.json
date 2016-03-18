@@ -39,6 +39,9 @@
         },
         "cordova-plugin-crosswalk-webview": {
             "PACKAGE_NAME": "com.appathon.quickinsure"
+        },
+        "ibm-mfp-core": {
+            "PACKAGE_NAME": "com.appathon.quickinsure"
         }
     },
     "dependent_plugins": {}

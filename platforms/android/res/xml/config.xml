@@ -39,7 +39,26 @@
     <preference default="--disable-pull-to-refresh-effect" name="xwalkCommandLine" />
     <preference default="embedded" name="xwalkMode" />
     <preference default="true" name="xwalkMultipleApk" />
+    <feature name="BMSClient">
+        <param name="android-package" value="com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVBMSClient" />
+    </feature>
+    <feature name="MFPRequest">
+        <param name="android-package" value="com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPRequest" />
+    </feature>
+    <feature name="MFPLogger">
+        <param name="android-package" value="com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPLogger" />
+    </feature>
+    <feature name="MFPAnalytics">
+        <param name="android-package" value="com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPAnalytics" />
+    </feature>
+    <feature name="MFPAuthorizationManager">
+        <param name="android-package" value="com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPAuthorizationManager" />
+    </feature>
+    <feature name="MFPAuthenticationContext">
+        <param name="android-package" value="com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPAuthenticationContext" />
+    </feature>
     <allow-intent href="market:*" />
+    <preference name="android-minSdkVersion" value="15" />
     <name>QuickInsure</name>
     <description>
         Application for General Insurance

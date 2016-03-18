@@ -111,6 +111,41 @@ module.exports = [
         "clobbers": [
             "window.StatusBar"
         ]
+    },
+    {
+        "file": "plugins/ibm-mfp-core/www/BMSClient.js",
+        "id": "ibm-mfp-core.BMSClient",
+        "clobbers": [
+            "BMSClient"
+        ]
+    },
+    {
+        "file": "plugins/ibm-mfp-core/www/MFPRequest.js",
+        "id": "ibm-mfp-core.MFPRequest",
+        "clobbers": [
+            "MFPRequest"
+        ]
+    },
+    {
+        "file": "plugins/ibm-mfp-core/www/MFPLogger.js",
+        "id": "ibm-mfp-core.MFPLogger",
+        "clobbers": [
+            "MFPLogger"
+        ]
+    },
+    {
+        "file": "plugins/ibm-mfp-core/www/MFPAnalytics.js",
+        "id": "ibm-mfp-core.MFPAnalytics",
+        "clobbers": [
+            "MFPAnalytics"
+        ]
+    },
+    {
+        "file": "plugins/ibm-mfp-core/www/MFPAuthorizationManager.js",
+        "id": "ibm-mfp-core.MFPAuthorizationManager",
+        "clobbers": [
+            "MFPAuthorizationManager"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -126,7 +161,8 @@ module.exports.metadata =
     "cordova-plugin-network-information": "1.2.0",
     "cordova-plugin-splashscreen": "3.1.0",
     "cordova-plugin-statusbar": "2.1.2",
-    "cordova-plugin-crosswalk-webview": "1.6.0"
+    "cordova-plugin-crosswalk-webview": "1.6.0",
+    "ibm-mfp-core": "1.0.11"
 };
 // BOTTOM OF METADATA
 });

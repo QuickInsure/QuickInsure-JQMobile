@@ -67,6 +67,30 @@
                         {
                             "xml": "<preference default=\"true\" name=\"xwalkMultipleApk\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"BMSClient\"><param name=\"android-package\" value=\"com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVBMSClient\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"MFPRequest\"><param name=\"android-package\" value=\"com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPRequest\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"MFPLogger\"><param name=\"android-package\" value=\"com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPLogger\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"MFPAnalytics\"><param name=\"android-package\" value=\"com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPAnalytics\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"MFPAuthorizationManager\"><param name=\"android-package\" value=\"com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPAuthorizationManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"MFPAuthenticationContext\"><param name=\"android-package\" value=\"com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPAuthenticationContext\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -84,6 +108,20 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.USE_CREDENTIALS\" />",
                             "count": 1
                         }
                     ]
@@ -123,6 +161,9 @@
             "PACKAGE_NAME": "com.appathon.quickinsure"
         },
         "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.appathon.quickinsure"
+        },
+        "ibm-mfp-core": {
             "PACKAGE_NAME": "com.appathon.quickinsure"
         }
     },
@@ -239,6 +280,41 @@
             "clobbers": [
                 "window.StatusBar"
             ]
+        },
+        {
+            "file": "plugins/ibm-mfp-core/www/BMSClient.js",
+            "id": "ibm-mfp-core.BMSClient",
+            "clobbers": [
+                "BMSClient"
+            ]
+        },
+        {
+            "file": "plugins/ibm-mfp-core/www/MFPRequest.js",
+            "id": "ibm-mfp-core.MFPRequest",
+            "clobbers": [
+                "MFPRequest"
+            ]
+        },
+        {
+            "file": "plugins/ibm-mfp-core/www/MFPLogger.js",
+            "id": "ibm-mfp-core.MFPLogger",
+            "clobbers": [
+                "MFPLogger"
+            ]
+        },
+        {
+            "file": "plugins/ibm-mfp-core/www/MFPAnalytics.js",
+            "id": "ibm-mfp-core.MFPAnalytics",
+            "clobbers": [
+                "MFPAnalytics"
+            ]
+        },
+        {
+            "file": "plugins/ibm-mfp-core/www/MFPAuthorizationManager.js",
+            "id": "ibm-mfp-core.MFPAuthorizationManager",
+            "clobbers": [
+                "MFPAuthorizationManager"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -252,6 +328,7 @@
         "cordova-plugin-network-information": "1.2.0",
         "cordova-plugin-splashscreen": "3.1.0",
         "cordova-plugin-statusbar": "2.1.2",
-        "cordova-plugin-crosswalk-webview": "1.6.0"
+        "cordova-plugin-crosswalk-webview": "1.6.0",
+        "ibm-mfp-core": "1.0.11"
     }
 }

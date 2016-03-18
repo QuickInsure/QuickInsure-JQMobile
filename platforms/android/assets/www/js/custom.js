@@ -18,6 +18,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         console.log(navigator.camera);
+        BMSClient.initialize("http://qi.au-syd.mybluemix.net", "542f2cb5-9b79-4162-b0a8-d7b4c835e6fe");
     },
     onBackKeyDown: function(e) {
         e.preventDefault();
@@ -111,9 +112,31 @@ function submitForm(dataObject, formData, formID) {
     var action = dataObject.action;
     var redirecturl = dataObject.redirecturl;
 
-    $.mobile.navigate(redirecturl);
+
+    var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
+
+    var queryParams = {
+        username: "avdhut.vaidya",
+        password: "123456"
+    };
+    request.setQueryParameters(queryParams);
+
+    request.send("some body",
+        function(successResponse){
+            alert("text :: " + successResponse.text);
+            alert("status :: " + successResponse.status);
+            alert("headers :: " + successResponse.headers);
+        }, 
+        function (failureResponse){
+            alert("text :: " + failureResponse.text);
+            alert("errorCode:: " + failureResponse.errorCode);
+            alert("errorDescription :: " + failureResponse.errorDescription);
+        }
+    );
+
+    //$.mobile.navigate(redirecturl);
     return false;
-    $.ajax({
+    /*$.ajax({
         url: serverURL,
         data: {
             module: module,
@@ -143,7 +166,7 @@ function submitForm(dataObject, formData, formID) {
         error: function (request,error) {
             showMessage(networkErrorMessage, null, null, null);
         }
-    });
+    });*/
 }
 
 
@@ -170,7 +193,7 @@ $(document).on('mobileinit', function() {
 $(window).on('hashchange', function() {
     var currentHash = jQuery.mobile.path.parseLocation().hash;
 
-    if (currentHash == "#viewProfile") {
+    if (currentHash == "#dashboard") {
         //getData("#viewProfile", "user", "profile");
     }
 });
@@ -184,12 +207,6 @@ $(document).on("pagecreate", function() {
             $(".photopopup img").css("max-height", maxHeight);
         }
     });
-});
-
-
-//Code to hide splash screen upon successful loading of pre-login screen
-$("#preLogin").on('pageload', function() {
-    navigator.splashscreen.hide();
 });
 
 
@@ -362,8 +379,6 @@ $(document).on('pageinit', function() {
                 showMessage("Please enter all required fields!", null, null, null);
             },
             submitHandler: function(form) {
-                $.mobile.navigate($(form).data().redirecturl);
-                return false;
                 if (checkConnection()) {
                     $("input[type='date']").each(function(){
                         var dateArray = $(this).val().split("/");

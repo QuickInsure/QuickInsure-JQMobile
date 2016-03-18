@@ -86,5 +86,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "ibm-mfp-core": {
+        "source": {
+            "type": "registry",
+            "id": "ibm-mfp-core"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
