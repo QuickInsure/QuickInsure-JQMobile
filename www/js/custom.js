@@ -121,13 +121,15 @@ function submitForm(dataObject, formData, formID) {
     };
     request.setQueryParameters(queryParams);
 
-    request.send("some body",
+    request.send(
         function(successResponse){
+            console.log(successResponse);
             alert("text :: " + successResponse.text);
             alert("status :: " + successResponse.status);
             alert("headers :: " + successResponse.headers);
         }, 
         function (failureResponse){
+            console.log(failureResponse);
             alert("text :: " + failureResponse.text);
             alert("errorCode:: " + failureResponse.errorCode);
             alert("errorDescription :: " + failureResponse.errorDescription);
