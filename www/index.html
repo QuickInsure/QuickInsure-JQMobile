@@ -67,11 +67,16 @@
 				</div>
 
 				<div data-role="nd2tab" data-tab="car">
-					<nd2-include data-src="fragments/car.html"></nd2-include>
+					<form id="carQuoteForm" name="carQuoteForm" data-ajax="false" data-module="car" data-action="getCarQuote" data-transition="pop">
+						<nd2-include data-src="fragments/car.html"></nd2-include>
+			        </form>
+					<!-- <nd2-include data-src="fragments/car.html"></nd2-include> -->
 				</div>
 
 				<div data-role="nd2tab" data-tab="bike">
+					<form id="bikeQuoteForm" name="bikeQuoteForm" data-ajax="false" data-module="bike" data-action="getBikeQuote" data-transition="pop">
 					<nd2-include data-src="fragments/bike.html"></nd2-include>
+					</form>>
 				</div>
 
 			</div>
