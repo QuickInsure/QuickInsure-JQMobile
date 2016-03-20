@@ -141,7 +141,6 @@ function submitForm(dataObject, formData, formID) {
        $.mobile.changePage("fragments/carQuote.html");   
     }
 
-<<<<<<< HEAD
 
     // var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
 
@@ -168,7 +167,7 @@ function submitForm(dataObject, formData, formID) {
 if (formID !="carQuoteForm" ){
     alert("no car form")
     $.mobile.navigate(redirecturl);
-=======
+}
     var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
     request.setQueryParameters(formData);
 
@@ -186,9 +185,9 @@ if (formID !="carQuoteForm" ){
             alert("errorDescription :: " + failureResponse.errorDescription);
         }
     );
->>>>>>> aa0e16ceb6042beb08bb4522b78f3a7f7cb43b5a
+
     return false;
-}
+
     /*$.ajax({
         url: serverURL,
         data: {
