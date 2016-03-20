@@ -42,6 +42,9 @@
         },
         "ibm-mfp-core": {
             "PACKAGE_NAME": "com.appathon.quickinsure"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.appathon.quickinsure"
         }
     },
     "dependent_plugins": {}

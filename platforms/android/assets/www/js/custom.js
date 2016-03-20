@@ -37,6 +37,24 @@ app.initialize();
 var networkErrorMessage = 'Network error! Please try again.';
 
 
+//Function to convert form data into JSON object
+(function($,undefined){
+    '$:nomunge'; // Used by YUI compressor.
+    $.fn.serializeObject = function(){
+        var obj = {};
+
+        $.each( this.serializeArray(), function(i,o){
+            var n = o.name,
+            v = o.value;
+
+            obj[n] = obj[n] === undefined ? v
+            : $.isArray( obj[n] ) ? obj[n].concat( v )
+            : [ obj[n], v ];
+        });
+
+        return obj;
+    };
+})(jQuery);
 
 
 //Function to check for network connectivity
@@ -114,29 +132,22 @@ function submitForm(dataObject, formData, formID) {
 
 
     var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
-
-    var queryParams = {
-        username: "avdhut.vaidya",
-        password: "123456"
-    };
-    request.setQueryParameters(queryParams);
+    request.setQueryParameters(formData);
 
     request.send(
         function(successResponse){
-            console.log(successResponse);
-            alert("text :: " + successResponse.text);
-            alert("status :: " + successResponse.status);
-            alert("headers :: " + successResponse.headers);
+            alert("responseText :: " + successResponse.responseText);
+            //alert("status :: " + successResponse.status);
+            if (successResponse.responseText != "false") {
+                $.mobile.navigate(redirecturl);
+            }
         }, 
         function (failureResponse){
-            console.log(failureResponse);
-            alert("text :: " + failureResponse.text);
-            alert("errorCode:: " + failureResponse.errorCode);
+            alert("errorCode :: " + failureResponse.errorCode);
+            alert("status:: " + failureResponse.status);
             alert("errorDescription :: " + failureResponse.errorDescription);
         }
     );
-
-    //$.mobile.navigate(redirecturl);
     return false;
     /*$.ajax({
         url: serverURL,
@@ -388,8 +399,8 @@ $(document).on('pageinit', function() {
                             $(this).val(dateArray[2]+"-"+dateArray[0]+"-"+dateArray[1]);
                         }
                     });
-                    submitForm($(form).data(), $(form).serialize(), $(form).prop("id"));
-
+                    //submitForm($(form).data(), $(form).serialize(), $(form).prop("id"));
+                    submitForm($(form).data(), $(form).serializeObject(), $(form).prop("id"));
                 }
                 else {
                     showMessage(networkErrorMessage, null, null, null);

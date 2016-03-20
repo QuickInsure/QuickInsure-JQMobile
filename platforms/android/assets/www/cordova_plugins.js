@@ -162,7 +162,8 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "3.1.0",
     "cordova-plugin-statusbar": "2.1.2",
     "cordova-plugin-crosswalk-webview": "1.6.0",
-    "ibm-mfp-core": "1.0.11"
+    "ibm-mfp-core": "1.0.11",
+    "cordova-plugin-console": "1.0.2"
 };
 // BOTTOM OF METADATA
 });
