@@ -129,8 +129,46 @@ function submitForm(dataObject, formData, formID) {
     var module = dataObject.module;
     var action = dataObject.action;
     var redirecturl = dataObject.redirecturl;
+    console.log("Module-->"+module+"<--action-->"+action+"<--redirectURL-->"+redirecturl)
+    console.log(formData+"formData")
+    if (formID =="carQuoteForm" ){
+        alert("submitting car form");
+       $.mobile.changePage("fragments/carQuote.html");   
+    }
 
+    if (formID =="bikeQuoteForm" ){
+        alert("submitting Bike form");
+       $.mobile.changePage("fragments/carQuote.html");   
+    }
 
+<<<<<<< HEAD
+
+    // var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
+
+    // var queryParams = {
+    //     username: "avdhut.vaidya",
+    //     password: "123456"
+    // };
+    // request.setQueryParameters(queryParams);
+
+    // request.send(
+    //     function(successResponse){
+    //         console.log(successResponse);
+    //         alert("text :: " + successResponse.text);
+    //         alert("status :: " + successResponse.status);
+    //         alert("headers :: " + successResponse.headers);
+    //     }, 
+    //     function (failureResponse){
+    //         console.log(failureResponse);
+    //         alert("text :: " + failureResponse.text);
+    //         alert("errorCode:: " + failureResponse.errorCode);
+    //         alert("errorDescription :: " + failureResponse.errorDescription);
+    //     }
+    // );
+if (formID !="carQuoteForm" ){
+    alert("no car form")
+    $.mobile.navigate(redirecturl);
+=======
     var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
     request.setQueryParameters(formData);
 
@@ -148,7 +186,9 @@ function submitForm(dataObject, formData, formID) {
             alert("errorDescription :: " + failureResponse.errorDescription);
         }
     );
+>>>>>>> aa0e16ceb6042beb08bb4522b78f3a7f7cb43b5a
     return false;
+}
     /*$.ajax({
         url: serverURL,
         data: {
@@ -443,5 +483,7 @@ $(document).on('pageinit', function() {
             window.plugins.socialsharing.share(null, null, null, 'http://www.windowsphone.com/<language>-<country>/store/app/<app-name>/<app-id>');   
         }
     });
+    var carQuote = "420102";
+    $(".quotePrice").text(carQuote);
     /*-----------Miscellaneous Events end-----------*/
 });

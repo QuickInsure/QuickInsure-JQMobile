@@ -1,12 +1,12 @@
-<form name="getCarQuote">
+<!-- <form name="getCarQuote" id="getCarQuote" data-ajax="false" data-module="carQuote" data-action="getCarQuote"> -->
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-md-4">
 			<div class="box">
 				<label for="carname">Car Name:</label>
-        		<input type="text" name="carname" id="carname" value="" data-clear-btn="true" placeholder="Car Name">
+        		<input type="text" name="carname" id="carname" value="" data-clear-btn="true" placeholder="Car Name" class="required">
 
 				<label for="registrationNum">Car Registration Number:</label>
-        		<input type="text" name="registrationNum" id="registrationNum" value="" data-clear-btn="true" placeholder="Car Registration Number">
+        		<input type="text" name="registrationNum" id="registrationNum" value="" data-clear-btn="true" placeholder="Car Registration Number" class="required">
         	</div>
 
 			<div class="box">
@@ -30,8 +30,17 @@
 	</div>
 
 	<div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-4">
-        	<button class="ui-btn">Submit</button>
-        </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <input type="submit" class="ui-btn" value="View Quote">
     </div>
-</form>
+<!--     <div id="dialog">
+        <div class="content"></div>
+    </div>
+    <button id="opener">Open Dialog</button> -->
+<!-- </body> -->
+<!--         <div class="col-xs-12 col-sm-6 col-md-4">
+            <button class="ui-btn">Get Quote</button>
+        </div> -->
+        <!-- <a href="fragments/carQuote.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Open dialog</a> -->
+    </div>
+<!-- </form> -->
