@@ -1,25 +1,23 @@
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4">
     	<div class="box">
-    		<label for="username">Username:</label>
-    		<input type="text" name="username" id="username" value="" data-clear-btn="true" class="required" placeholder="Username">
+    		<label for="login_field1">Customer ID:</label>
+    		<input type="text" name="custid" id="login_field1" value="" data-clear-btn="true" class="required" placeholder="Customer ID" autocomplete="off">
 
-    		<label for="password">Password:</label>
-    		<input type="password" name="password" id="password" value="" data-clear-btn="true" class="required" placeholder="Password" autocomplete="off">
+    		<label for="login_field2">Account No.:</label>
+    		<input type="text" name="accountno" id="login_field2" value="" data-clear-btn="true" placeholder="Account No." autocomplete="off">
     	</div>
 
 		<div class="box">
 			<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                <input type="radio" name="loginType" id="mobile" value="mobile" checked="checked">
-                <label for="mobile">MOBILE</label>
-                <input type="radio" name="loginType" id="icici" value="icici">
+                <input type="radio" name="loginType" id="icici" value="icici" checked="checked">
                 <label for="icici">ICICI</label>
+                <input type="radio" name="loginType" id="mobile" value="mobile">
+                <label for="mobile">MOBILE</label>
                 <input type="radio" name="loginType" id="aadhar" value="aadhar">
                 <label for="aadhar">AADHAR</label>
                 <input type="radio" name="loginType" id="email" value="email">
                 <label for="email">EMAIL</label>
-                <input type="radio" name="loginType" id="gmail" value="gmail">
-                <label for="gmail">GMAIL</label>
             </fieldset>
         </div>
     </div>
@@ -30,3 +28,63 @@
     	<input type="submit" class="ui-btn" value="Submit">
     </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("input[name='loginType']").change(function(){
+        $("em.error").remove();
+        if ($(this).val() == "icici") {
+            $("#login_field1").attr("name", "custid");
+            $("#login_field1").attr("placeholder", "Customer ID");
+            $("#login_field1").val("");
+            $("label[for='login_field1']").html("Customer ID:");
+
+            $("#login_field2").attr("name", "accountno");
+            $("#login_field2").attr("placeholder", "Account No.");
+            $("#login_field2").attr("type", "text");
+            $("#login_field2").removeClass("required");
+            $("#login_field2").val("");
+            $("label[for='login_field2']").html("Account No.:");
+        }
+        else if ($(this).val() == "mobile") {
+            $("#login_field1").attr("name", "mobile");
+            $("#login_field1").attr("placeholder", "Mobile ID");
+            $("#login_field2").attr("type", "password");
+            $("#login_field1").val("");
+            $("label[for='login_field1']").html("Mobile No.:");
+
+            $("#login_field2").attr("name", "password");
+            $("#login_field2").attr("placeholder", "Password");
+            $("#login_field2").addClass("required");
+            $("#login_field2").val("");
+            $("label[for='login_field2']").html("Password:");
+        }
+        else if ($(this).val() == "aadhar") {
+            $("#login_field1").attr("name", "aadhar");
+            $("#login_field1").attr("placeholder", "AADHAR ID");
+            $("#login_field1").val("");
+            $("label[for='login_field1']").html("AADHAR No.:");
+
+            $("#login_field2").attr("name", "password");
+            $("#login_field2").attr("placeholder", "Password");
+            $("#login_field2").attr("type", "password");
+            $("#login_field2").addClass("required");
+            $("#login_field2").val("");
+            $("label[for='login_field2']").html("Password:");
+        }
+        else if ($(this).val() == "email") {
+            $("#login_field1").attr("name", "email");
+            $("#login_field1").attr("placeholder", "Email ID");
+            $("#login_field2").attr("type", "password");
+            $("#login_field1").val("");
+            $("label[for='login_field1']").html("Email ID:");
+
+            $("#login_field2").attr("name", "password");
+            $("#login_field2").attr("placeholder", "Password");
+            $("#login_field2").addClass("required");
+            $("#login_field2").val("");
+            $("label[for='login_field2']").html("Password:");
+        }
+    });
+});
+</script>

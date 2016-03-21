@@ -129,45 +129,22 @@ function submitForm(dataObject, formData, formID) {
     var module = dataObject.module;
     var action = dataObject.action;
     var redirecturl = dataObject.redirecturl;
-    console.log("Module-->"+module+"<--action-->"+action+"<--redirectURL-->"+redirecturl)
-    console.log(formData+"formData")
-    if (formID =="carQuoteForm" ){
-        alert("submitting car form");
-       $.mobile.changePage("fragments/carQuote.html");   
+    
+    console.log("Module-->"+module+"<--action-->"+action+"<--redirectURL-->"+redirecturl);
+    console.log(formData+"formData");
+    
+	if (formID =="carQuoteForm" ){
+		$("#carQuoteDialog").popup("open");
+		return false;
+	}
+	else if (formID =="bikeQuoteForm" ){
+		$("#carQuoteDialog").popup("open");
+		return false;
     }
-
-    if (formID =="bikeQuoteForm" ){
-        alert("submitting Bike form");
-       $.mobile.changePage("fragments/carQuote.html");   
-    }
-
-
-    // var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
-
-    // var queryParams = {
-    //     username: "avdhut.vaidya",
-    //     password: "123456"
-    // };
-    // request.setQueryParameters(queryParams);
-
-    // request.send(
-    //     function(successResponse){
-    //         console.log(successResponse);
-    //         alert("text :: " + successResponse.text);
-    //         alert("status :: " + successResponse.status);
-    //         alert("headers :: " + successResponse.headers);
-    //     }, 
-    //     function (failureResponse){
-    //         console.log(failureResponse);
-    //         alert("text :: " + failureResponse.text);
-    //         alert("errorCode:: " + failureResponse.errorCode);
-    //         alert("errorDescription :: " + failureResponse.errorDescription);
-    //     }
-    // );
-if (formID !="carQuoteForm" ){
-    alert("no car form")
-    $.mobile.navigate(redirecturl);
-}
+    else {
+		$.mobile.navigate(redirecturl);
+	}
+    
     var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
     request.setQueryParameters(formData);
 
@@ -438,7 +415,6 @@ $(document).on('pageinit', function() {
                             $(this).val(dateArray[2]+"-"+dateArray[0]+"-"+dateArray[1]);
                         }
                     });
-                    //submitForm($(form).data(), $(form).serialize(), $(form).prop("id"));
                     submitForm($(form).data(), $(form).serializeObject(), $(form).prop("id"));
                 }
                 else {
@@ -482,6 +458,9 @@ $(document).on('pageinit', function() {
             window.plugins.socialsharing.share(null, null, null, 'http://www.windowsphone.com/<language>-<country>/store/app/<app-name>/<app-id>');   
         }
     });
+
+
+
     var carQuote = "420102";
     $(".quotePrice").text(carQuote);
     /*-----------Miscellaneous Events end-----------*/

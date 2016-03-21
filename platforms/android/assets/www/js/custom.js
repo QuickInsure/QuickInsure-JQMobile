@@ -129,8 +129,22 @@ function submitForm(dataObject, formData, formID) {
     var module = dataObject.module;
     var action = dataObject.action;
     var redirecturl = dataObject.redirecturl;
-
-
+    
+    console.log("Module-->"+module+"<--action-->"+action+"<--redirectURL-->"+redirecturl);
+    console.log(formData+"formData");
+    
+	if (formID =="carQuoteForm" ){
+		$("#carQuoteDialog").popup("open");
+		return false;
+	}
+	else if (formID =="bikeQuoteForm" ){
+		$("#carQuoteDialog").popup("open");
+		return false;
+    }
+    else {
+		$.mobile.navigate(redirecturl);
+	}
+    
     var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
     request.setQueryParameters(formData);
 
@@ -148,7 +162,9 @@ function submitForm(dataObject, formData, formID) {
             alert("errorDescription :: " + failureResponse.errorDescription);
         }
     );
+
     return false;
+
     /*$.ajax({
         url: serverURL,
         data: {
@@ -399,7 +415,6 @@ $(document).on('pageinit', function() {
                             $(this).val(dateArray[2]+"-"+dateArray[0]+"-"+dateArray[1]);
                         }
                     });
-                    //submitForm($(form).data(), $(form).serialize(), $(form).prop("id"));
                     submitForm($(form).data(), $(form).serializeObject(), $(form).prop("id"));
                 }
                 else {
@@ -443,5 +458,10 @@ $(document).on('pageinit', function() {
             window.plugins.socialsharing.share(null, null, null, 'http://www.windowsphone.com/<language>-<country>/store/app/<app-name>/<app-id>');   
         }
     });
+
+
+
+    var carQuote = "420102";
+    $(".quotePrice").text(carQuote);
     /*-----------Miscellaneous Events end-----------*/
 });

@@ -49,6 +49,8 @@
 				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
 			</div>
 
+			<nd2-include data-src="fragments/quote.dialog.html"></nd2-include>
+
 			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
 				<a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
 				<h1 class="wow fadeIn" data-wow-delay='0.4s'>QuickInsure</h1>
@@ -67,18 +69,22 @@
 				</div>
 
 				<div data-role="nd2tab" data-tab="car">
-					<nd2-include data-src="fragments/car.html"></nd2-include>
+					<form id="carQuoteForm" name="carQuoteForm" data-ajax="false" data-module="car" data-action="getCarQuote" data-transition="pop">
+						<nd2-include data-src="fragments/car.html"></nd2-include>
+			        </form>
 				</div>
 
 				<div data-role="nd2tab" data-tab="bike">
-					<nd2-include data-src="fragments/bike.html"></nd2-include>
+					<form id="bikeQuoteForm" name="bikeQuoteForm" data-ajax="false" data-module="bike" data-action="getBikeQuote" data-transition="pop">
+						<nd2-include data-src="fragments/bike.html"></nd2-include>
+					</form>
 				</div>
 
 			</div>
 		</div>
 
 		<script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="vendor/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
 		<script type="text/javascript" src="vendor/waves/waves.min.js"></script>
