@@ -45,6 +45,10 @@
         },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.appathon.quickinsure"
+        },
+        "plugin.google.maps": {
+            "API_KEY_FOR_ANDROID": "AIzaSyBXkgaQA9KIixtw8VmhdaQGBG2RGFKlBC8",
+            "PACKAGE_NAME": "com.appathon.quickinsure"
         }
     },
     "dependent_plugins": {}

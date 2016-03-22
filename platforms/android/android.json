@@ -91,6 +91,18 @@
                         {
                             "xml": "<feature name=\"MFPAuthenticationContext\"><param name=\"android-package\" value=\"com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.core.CDVMFPAuthenticationContext\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"GoogleMaps\"><param name=\"android-package\" value=\"plugin.google.maps.GoogleMaps\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"External\"><param name=\"android-package\" value=\"plugin.google.maps.External\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Geocoder\"><param name=\"android-package\" value=\"plugin.google.maps.MyGeocoder\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -114,7 +126,7 @@
                     "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
@@ -122,6 +134,36 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.USE_CREDENTIALS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"com.google.android.providers.gsf.permission.READ_GSERVICES\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:glEsVersion=\"0x00020000\" android:required=\"true\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<meta-data android:name=\"com.google.android.maps.v2.API_KEY\" android:value=\"AIzaSyBXkgaQA9KIixtw8VmhdaQGBG2RGFKlBC8\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"@integer/google_play_services_version\" />",
                             "count": 1
                         }
                     ]
@@ -167,6 +209,10 @@
             "PACKAGE_NAME": "com.appathon.quickinsure"
         },
         "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.appathon.quickinsure"
+        },
+        "plugin.google.maps": {
+            "API_KEY_FOR_ANDROID": "AIzaSyBXkgaQA9KIixtw8VmhdaQGBG2RGFKlBC8",
             "PACKAGE_NAME": "com.appathon.quickinsure"
         }
     },
@@ -318,6 +364,13 @@
             "clobbers": [
                 "MFPAuthorizationManager"
             ]
+        },
+        {
+            "file": "plugins/plugin.google.maps/www/googlemaps-cdv-plugin.js",
+            "id": "plugin.google.maps.phonegap-googlemaps-plugin",
+            "clobbers": [
+                "plugin.google.maps"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -333,6 +386,7 @@
         "cordova-plugin-statusbar": "2.1.2",
         "cordova-plugin-crosswalk-webview": "1.6.0",
         "ibm-mfp-core": "1.0.11",
-        "cordova-plugin-console": "1.0.2"
+        "cordova-plugin-console": "1.0.2",
+        "plugin.google.maps": "1.3.9"
     }
 }

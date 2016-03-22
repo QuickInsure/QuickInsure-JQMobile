@@ -19,6 +19,15 @@ var app = {
     onDeviceReady: function() {
         console.log(navigator.camera);
         BMSClient.initialize("http://qi.au-syd.mybluemix.net", "542f2cb5-9b79-4162-b0a8-d7b4c835e6fe");
+
+        // Define a div tag with id="map_canvas"
+        var mapDiv = document.getElementById("map_canvas");
+
+        // Initialize the map plugin
+        var map = plugin.google.maps.Map.getMap(mapDiv);
+
+        // You have to wait the MAP_READY event.
+        map.on(plugin.google.maps.event.MAP_READY, onMapInit);
     },
     onBackKeyDown: function(e) {
         e.preventDefault();
@@ -129,9 +138,14 @@ function submitForm(dataObject, formData, formID) {
     var module = dataObject.module;
     var action = dataObject.action;
     var redirecturl = dataObject.redirecturl;
-    
-    console.log("Module-->"+module+"<--action-->"+action+"<--redirectURL-->"+redirecturl);
-    console.log(formData+"formData");
+
+    var values = {};
+    $.each($('#'+formID).serializeArray(), function(i, field) {
+        values[field.name] = field.value;
+        console.log(field.name+"<-->"+field.value)
+    });
+     console.log("Module-->"+module+"<--action-->"+action+"<--redirectURL-->"+redirecturl);
+     console.log(formData+"formData");
     
 	if (formID =="carQuoteForm" ){
 		$("#carQuoteDialog").popup("open");
@@ -141,41 +155,49 @@ function submitForm(dataObject, formData, formID) {
 		$("#carQuoteDialog").popup("open");
 		return false;
     }
+    else if (formID =="loginForm") {
+        $.mobile.navigate(redirecturl); return false;
+    }
     
-    var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
+    var request = new MFPRequest("/"+module+"/"+action, MFPRequest.POST);
     request.setQueryParameters(formData);
 
     request.send(
         function(successResponse){
-			var response = JSON.parse(successResponse.responseText);
-            if (response.status == "valid") {
-				var summaryString = "<p>Name: " + response.data.name + "</p>";
-				summaryString += "<p>Mobile No.: " + response.data.mobile + "</p>";
-				summaryString += "<p>Email ID: " + response.data.email + "</p>";
-				summaryString += "<p>Aadhar No.: " + response.data.aadhar + "</p>";
-				summaryString += "<p>Gender: " + response.data.gender + "</p>";
-				$("#account_details").append(summaryString);
+            var response = JSON.parse(successResponse.responseText);
+            if (formID == "loginForm") {
+                if (response.status == "valid") {
+    				var summaryString = "<p>Name: " + response.data.name + "</p>";
+    				summaryString += "<p>Mobile No.: " + response.data.mobile + "</p>";
+    				summaryString += "<p>Email ID: " + response.data.email + "</p>";
+    				summaryString += "<p>Aadhar No.: " + response.data.aadhar + "</p>";
+    				summaryString += "<p>Gender: " + response.data.gender + "</p>";
+    				$("#account_details").append(summaryString);
 
-                $.mobile.navigate(redirecturl);
-            }
-            else if (response.status == "invalid") {
-            	showMessage("Invalid User!", null, null, null);
-            }
-            else {
-                if (response[0].code == 200) {
-                    var summaryString = "<p>Customer ID: " + response[1].custid + "</p>";
-                    summaryString += "<p>Account No.: " + response[1].accountno + "</p>";
-                    summaryString += "<p>Account Type: " + response[1].accounttype + "</p>";
-                    summaryString += "<p>Balance: " + response[1].balance + "</p>";
-                    summaryString += "<p>Mobile No.: " + response[1].mobileno + "</p>";
-                    $("#account_details").append(summaryString);
-                	
-                	$.mobile.navigate(redirecturl);
+                    $.mobile.navigate(redirecturl);
+                }
+                else if (response.status == "invalid") {
+                	showMessage("Invalid User!", null, null, null);
                 }
                 else {
-                    showMessage(response[0].description, null, null, null);
-                    //showMessage(response[0].message, null, null, null);
+                    if (response[0].code == 200) {
+                        var summaryString = "<p>Customer ID: " + response[1].custid + "</p>";
+                        summaryString += "<p>Account No.: " + response[1].accountno + "</p>";
+                        summaryString += "<p>Account Type: " + response[1].accounttype + "</p>";
+                        summaryString += "<p>Balance: " + response[1].balance + "</p>";
+                        summaryString += "<p>Mobile No.: " + response[1].mobileno + "</p>";
+                        $("#account_details").append(summaryString);
+                    	
+                    	$.mobile.navigate(redirecturl);
+                    }
+                    else {
+                        showMessage(response[0].description, null, null, null);
+                        //showMessage(response[0].message, null, null, null);
+                    }
                 }
+            }
+            else if (formID == "mapForm") {
+                alert(successResponse.responseText);
             }
         }, 
         function (failureResponse){
@@ -450,6 +472,7 @@ $(document).on('pageinit', function() {
 
 
 	$("li[data-tab='account']").click();
+    $("li[data-tab='login']").click();
 
     var carQuote = "420102";
     $(".quotePrice").text(carQuote);

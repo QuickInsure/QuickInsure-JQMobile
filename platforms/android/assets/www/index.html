@@ -31,13 +31,14 @@
 			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
 
 				<div data-role="nd2tab" data-tab="login">
-					<form id="loginForm" name="loginForm" data-ajax="false" data-module="user" data-action="login" data-redirecturl="#dashboard">
+					<form id="loginForm" name="loginForm" data-ajax="false" data-module="login" data-action="mobileAuth" data-redirecturl="#dashboard">
 						<nd2-include data-src="fragments/login.html"></nd2-include>
 			        </form>
+		        <div id="map_canvas"></div>
 				</div>
 
 				<div data-role="nd2tab" data-tab="register">
-					<form id="registerForm" name="registerForm" data-ajax="false" data-module="user" data-action="register" data-redirecturl="#dashboard">
+					<form id="registerForm" name="registerForm" data-ajax="false" data-module="login" data-action="mobileAuth" data-redirecturl="#dashboard">
 						<nd2-include data-src="fragments/register.html"></nd2-include>
 			        </form>
 				</div>
@@ -81,6 +82,24 @@
 					</form>
 				</div>
 
+			</div>
+		</div>
+
+
+		<div data-role="page" id="map">
+			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
+			</div>
+
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
+				<a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
+				<h1 class="wow fadeIn" data-wow-delay='0.4s'>QuickInsure</h1>
+			</div>
+
+			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
+				<form id="mapForm" name="mapForm" data-ajax="false" data-module="login" data-action="getBranchATMGarage" data-redirecturl="#map">
+					<nd2-include data-src="fragments/map.html"></nd2-include>
+		        </form>
 			</div>
 		</div>
 

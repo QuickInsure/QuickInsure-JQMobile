@@ -146,6 +146,13 @@ module.exports = [
         "clobbers": [
             "MFPAuthorizationManager"
         ]
+    },
+    {
+        "file": "plugins/plugin.google.maps/www/googlemaps-cdv-plugin.js",
+        "id": "plugin.google.maps.phonegap-googlemaps-plugin",
+        "clobbers": [
+            "plugin.google.maps"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -163,7 +170,8 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.1.2",
     "cordova-plugin-crosswalk-webview": "1.6.0",
     "ibm-mfp-core": "1.0.11",
-    "cordova-plugin-console": "1.0.2"
+    "cordova-plugin-console": "1.0.2",
+    "plugin.google.maps": "1.3.9"
 };
 // BOTTOM OF METADATA
 });
