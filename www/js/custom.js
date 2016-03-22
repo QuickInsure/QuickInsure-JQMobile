@@ -449,6 +449,7 @@ $(document).on('pageinit', function() {
     });
 
 
+	$("li[data-tab='account']").click();
 
     var carQuote = "420102";
     $(".quotePrice").text(carQuote);
