@@ -148,6 +148,7 @@ function submitForm(dataObject, formData, formID) {
      console.log(formData+"formData");
     
 	if (formID =="carQuoteForm" ){
+       // console.log()
 		$("#carQuoteDialog").popup("open");
 		return false;
 	}
@@ -201,12 +202,45 @@ function submitForm(dataObject, formData, formID) {
             }
         }, 
         function (failureResponse){
-            showMessage("errorCode :: " + failureResponse.errorCode, null, null, null);
-            showMessage("status:: " + failureResponse.status, null, null, null);
-            showMessage("errorDescription :: " + failureResponse.errorDescription, null, null, null);
+            alert("errorCode :: " + failureResponse.errorCode);
+            alert("status:: " + failureResponse.status);
+            alert("errorDescription :: " + failureResponse.errorDescription);
         }
     );
+
     return false;
+
+    /*$.ajax({
+        url: serverURL,
+        data: {
+            module: module,
+            action: action,
+            formData: formData
+        },
+        dataType: 'json',
+        type: 'POST',                   
+        async: true,
+        beforeSend: function() {
+            $.mobile.loading("show");
+        },
+        complete: function() {
+            $.mobile.loading("hide");
+        },
+        success: function (result) {
+            if(result.status) {
+                if (result.message) {
+                    showMessage(result.message, null, null, null);
+                }
+                $.mobile.navigate(redirecturl);
+            }
+            else if (result.message) {
+                showMessage(result.message, null, null, null);
+            }
+        },
+        error: function (request,error) {
+            showMessage(networkErrorMessage, null, null, null);
+        }
+    });*/
 }
 
 
