@@ -129,11 +129,17 @@ function submitForm(dataObject, formData, formID) {
     var module = dataObject.module;
     var action = dataObject.action;
     var redirecturl = dataObject.redirecturl;
-    
+
+    var values = {};
+    $.each($('#'+formID).serializeArray(), function(i, field) {
+        values[field.name] = field.value;
+        console.log(field.name+"<-->"+field.value)
+    });
     console.log("Module-->"+module+"<--action-->"+action+"<--redirectURL-->"+redirecturl);
     console.log(formData+"formData");
     
 	if (formID =="carQuoteForm" ){
+       // console.log()
 		$("#carQuoteDialog").popup("open");
 		return false;
 	}
@@ -141,50 +147,61 @@ function submitForm(dataObject, formData, formID) {
 		$("#carQuoteDialog").popup("open");
 		return false;
     }
+    else {
+		$.mobile.navigate(redirecturl);
+	}
     
     var request = new MFPRequest("/login/mobileAuth", MFPRequest.POST);
     request.setQueryParameters(formData);
 
     request.send(
         function(successResponse){
-			var response = JSON.parse(successResponse.responseText);
-            if (response.status == "valid") {
-				var summaryString = "<p>Name: " + response.data.name + "</p>";
-				summaryString += "<p>Mobile No.: " + response.data.mobile + "</p>";
-				summaryString += "<p>Email ID: " + response.data.email + "</p>";
-				summaryString += "<p>Aadhar No.: " + response.data.aadhar + "</p>";
-				summaryString += "<p>Gender: " + response.data.gender + "</p>";
-				$("#account_details").append(summaryString);
-
+            alert("responseText :: " + successResponse.responseText);
+            //alert("status :: " + successResponse.status);
+            if (successResponse.responseText != "false") {
                 $.mobile.navigate(redirecturl);
-            }
-            else if (response.status == "invalid") {
-            	showMessage("Invalid User!", null, null, null);
-            }
-            else {
-                if (response[0].code == 200) {
-                    var summaryString = "<p>Customer ID: " + response[1].custid + "</p>";
-                    summaryString += "<p>Account No.: " + response[1].accountno + "</p>";
-                    summaryString += "<p>Account Type: " + response[1].accounttype + "</p>";
-                    summaryString += "<p>Balance: " + response[1].balance + "</p>";
-                    summaryString += "<p>Mobile No.: " + response[1].mobileno + "</p>";
-                    $("#account_details").append(summaryString);
-                	
-                	$.mobile.navigate(redirecturl);
-                }
-                else {
-                    showMessage(response[0].description, null, null, null);
-                    //showMessage(response[0].message, null, null, null);
-                }
             }
         }, 
         function (failureResponse){
-            showMessage("errorCode :: " + failureResponse.errorCode, null, null, null);
-            showMessage("status:: " + failureResponse.status, null, null, null);
-            showMessage("errorDescription :: " + failureResponse.errorDescription, null, null, null);
+            alert("errorCode :: " + failureResponse.errorCode);
+            alert("status:: " + failureResponse.status);
+            alert("errorDescription :: " + failureResponse.errorDescription);
         }
     );
+
     return false;
+
+    /*$.ajax({
+        url: serverURL,
+        data: {
+            module: module,
+            action: action,
+            formData: formData
+        },
+        dataType: 'json',
+        type: 'POST',                   
+        async: true,
+        beforeSend: function() {
+            $.mobile.loading("show");
+        },
+        complete: function() {
+            $.mobile.loading("hide");
+        },
+        success: function (result) {
+            if(result.status) {
+                if (result.message) {
+                    showMessage(result.message, null, null, null);
+                }
+                $.mobile.navigate(redirecturl);
+            }
+            else if (result.message) {
+                showMessage(result.message, null, null, null);
+            }
+        },
+        error: function (request,error) {
+            showMessage(networkErrorMessage, null, null, null);
+        }
+    });*/
 }
 
 
@@ -449,7 +466,6 @@ $(document).on('pageinit', function() {
     });
 
 
-	$("li[data-tab='account']").click();
 
     var carQuote = "420102";
     $(".quotePrice").text(carQuote);
