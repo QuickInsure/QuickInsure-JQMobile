@@ -34,7 +34,6 @@
 					<form id="loginForm" name="loginForm" data-ajax="false" data-module="login" data-action="mobileAuth" data-redirecturl="#dashboard">
 						<nd2-include data-src="fragments/login.html"></nd2-include>
 			        </form>
-		        <div id="map_canvas"></div>
 				</div>
 
 				<div data-role="nd2tab" data-tab="register">
@@ -97,9 +96,24 @@
 			</div>
 
 			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
-				<form id="mapForm" name="mapForm" data-ajax="false" data-module="login" data-action="getBranchATMGarage" data-redirecturl="#map">
-					<nd2-include data-src="fragments/map.html"></nd2-include>
-		        </form>
+				<div id='map_canvas' style='width:100%;height:500px'>
+					<form id="mapForm" name="mapForm" data-ajax="false" data-module="login" data-action="getBranchATMGarage" data-redirecturl="#map">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-4">
+								<div class="box">
+									<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+						                <input type="radio" name="locate" id="atm" value="atm" checked="checked">
+						                <label for="atm">ATM</label>
+						                <input type="radio" name="locate" id="branch" value="branch">
+						                <label for="branch">Branch</label>
+						                <input type="radio" name="locate" id="garage" value="garage">
+						                <label for="garage">Garage</label>
+									</fieldset>
+								</div>
+							</div>
+						</div>
+					</form>					
+				</div>
 			</div>
 		</div>
 

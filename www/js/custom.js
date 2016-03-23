@@ -1,4 +1,5 @@
 //Cordova auto-generated code start
+var map;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -17,17 +18,8 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        console.log(navigator.camera);
         BMSClient.initialize("http://qi.au-syd.mybluemix.net", "542f2cb5-9b79-4162-b0a8-d7b4c835e6fe");
-
-        // Define a div tag with id="map_canvas"
-        var mapDiv = document.getElementById("map_canvas");
-
-        // Initialize the map plugin
-        var map = plugin.google.maps.Map.getMap(mapDiv);
-
-        // You have to wait the MAP_READY event.
-        map.on(plugin.google.maps.event.MAP_READY, onMapInit);
+        map = plugin.google.maps.Map.getMap();
     },
     onBackKeyDown: function(e) {
         e.preventDefault();
@@ -148,7 +140,6 @@ function submitForm(dataObject, formData, formID) {
      console.log(formData+"formData");
     
 	if (formID =="carQuoteForm" ){
-       // console.log()
 		$("#carQuoteDialog").popup("open");
 		return false;
 	}
@@ -198,7 +189,13 @@ function submitForm(dataObject, formData, formID) {
                 }
             }
             else if (formID == "mapForm") {
-                alert(successResponse.responseText);
+                map.clear();
+                $.each(response, function(branchName, branchData) {
+					map.addMarker({
+						'position': new plugin.google.maps.LatLng(branchData.lattitude, branchData.longitude),
+						'title': branchName
+					});
+                });
             }
         }, 
         function (failureResponse){
@@ -209,38 +206,6 @@ function submitForm(dataObject, formData, formID) {
     );
 
     return false;
-
-    /*$.ajax({
-        url: serverURL,
-        data: {
-            module: module,
-            action: action,
-            formData: formData
-        },
-        dataType: 'json',
-        type: 'POST',                   
-        async: true,
-        beforeSend: function() {
-            $.mobile.loading("show");
-        },
-        complete: function() {
-            $.mobile.loading("hide");
-        },
-        success: function (result) {
-            if(result.status) {
-                if (result.message) {
-                    showMessage(result.message, null, null, null);
-                }
-                $.mobile.navigate(redirecturl);
-            }
-            else if (result.message) {
-                showMessage(result.message, null, null, null);
-            }
-        },
-        error: function (request,error) {
-            showMessage(networkErrorMessage, null, null, null);
-        }
-    });*/
 }
 
 
@@ -267,8 +232,9 @@ $(document).on('mobileinit', function() {
 $(window).on('hashchange', function() {
     var currentHash = jQuery.mobile.path.parseLocation().hash;
 
-    if (currentHash == "#dashboard") {
+    if (currentHash == "#map") {
         //getData("#viewProfile", "user", "profile");
+        $("#mapForm").submit();
     }
 });
 
@@ -510,5 +476,27 @@ $(document).on('pageinit', function() {
 
     var carQuote = "420102";
     $(".quotePrice").text(carQuote);
+
+    $("input[name='locate']").off("change").on("change", function(){
+		$("#mapForm").submit();
+    });
+
+    //var map = plugin.google.maps.Map.getMap();
+    map.on(plugin.google.maps.event.MAP_READY, function(map) {
+		var points = [
+			new plugin.google.maps.LatLng(19.33, 72.75),
+			new plugin.google.maps.LatLng(19.33, 73.08),
+			new plugin.google.maps.LatLng(18.88, 72.75),
+			new plugin.google.maps.LatLng(18.88, 73.08)
+		];
+		var latLngBounds = new plugin.google.maps.LatLngBounds(points);
+
+		map.animateCamera({
+			'target' : latLngBounds
+		});
+
+        var div = document.getElementById('map_canvas');
+        map.setDiv(div);
+    });
     /*-----------Miscellaneous Events end-----------*/
 });
