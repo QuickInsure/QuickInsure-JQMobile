@@ -58,6 +58,10 @@ var networkErrorMessage = 'Network error! Please try again.';
 })(jQuery);
 
 
+$(function() {
+$("#datepicker").datepicker();
+});
+
 //Function to check for network connectivity
 function checkConnection() {
     if (typeof navigator.connection === 'undefined') {
@@ -308,7 +312,15 @@ function onFail(message) {
 }
 /*-----------Camera callback functions end-----------*/
 
-
+function getEapp(){
+//alert("going to eapp")
+redirecturl = "#eapp"
+console.log("fffff"+redirecturl)
+//location.href="www/fragments/eapp.html"
+$.mobile.navigate(redirecturl); 
+//event.preventDefault;
+return false;
+}
 //Equivalent to JQuery $(document).ready()
 $(document).on('pageinit', function() {
     FastClick.attach(document.body);
@@ -502,7 +514,7 @@ $(document).on('pageinit', function() {
 		$("#mapForm").submit();
     });
 
-    //var map = plugin.google.maps.Map.getMap();
+    var map = plugin.google.maps.Map.getMap();
     map.on(plugin.google.maps.event.MAP_READY, function(map) {
 		var points = [
 			new plugin.google.maps.LatLng(19.33, 72.75),

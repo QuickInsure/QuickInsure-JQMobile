@@ -58,6 +58,10 @@ var networkErrorMessage = 'Network error! Please try again.';
 })(jQuery);
 
 
+$(function() {
+$("#datepicker").datepicker();
+});
+
 //Function to check for network connectivity
 function checkConnection() {
     if (typeof navigator.connection === 'undefined') {
@@ -98,7 +102,6 @@ function renewPolicy(clickObject) {
 	}
 	else {
 		//if (device.platform == "Android") {
-		    //window.plugins.socialsharing.share(null, null, null, 'https://play.google.com/store/apps/details?id=com.clifford.eWarranty');
 		    window.plugins.socialsharing.shareViaSMS('Policy Renewal:\n'+clickObject.data('renewal'), '0612345678', null);
 		/*}
 		else if (device.platform == "iOS") {
@@ -202,7 +205,7 @@ function submitForm(dataObject, formData, formID) {
                         summaryString += "<p>Product: " + response.policyData.product + "</p>";
                         summaryString += "<p>Policy End Date: " + response.policyData.policy_end_date + "</p>";
                         summaryString += "<p>Total Premium: " + response.policyData.total_premium_amt + "</p>";
-                        renewalString = "Insured:"+response.policyData.insured_name+"|Product:"+response.policyData.product+"|Mobile:"+response.policyData.mobile_no+"|Email:"+response.policyData.email_id+"|Expiry:"+response.policyData.policy_end_date+"|DOB:"+response.policyData.dob+"|Address:"+response.policyData.resident_add+","+response.policyData.state+","+response.policyData.pincode+"|Renew For:1 year";
+                        renewalString = "Policy Renewal:\nInsured:"+response.policyData.insured_name+"\nProduct:"+response.policyData.product+"\nMobile:"+response.policyData.mobile_no+"\nEmail:"+response.policyData.email_id+"\nExpiry:"+response.policyData.policy_end_date+"\nDOB:"+response.policyData.dob+"\nAddress:"+response.policyData.resident_add+","+response.policyData.state+","+response.policyData.pincode+"\nRenew For:1 year";
                         summaryString += "<button class='ui-btn ui-btn-inline renew-button' data-renewal='"+renewalString+"'>Renew</button>";
                         $("#account_details").append(summaryString);
                     	
@@ -309,7 +312,15 @@ function onFail(message) {
 }
 /*-----------Camera callback functions end-----------*/
 
-
+function getEapp(){
+//alert("going to eapp")
+redirecturl = "#eapp"
+console.log("fffff"+redirecturl)
+//location.href="www/fragments/eapp.html"
+$.mobile.navigate(redirecturl); 
+//event.preventDefault;
+return false;
+}
 //Equivalent to JQuery $(document).ready()
 $(document).on('pageinit', function() {
     FastClick.attach(document.body);
@@ -503,7 +514,7 @@ $(document).on('pageinit', function() {
 		$("#mapForm").submit();
     });
 
-    //var map = plugin.google.maps.Map.getMap();
+    var map = plugin.google.maps.Map.getMap();
     map.on(plugin.google.maps.event.MAP_READY, function(map) {
 		var points = [
 			new plugin.google.maps.LatLng(19.33, 72.75),
