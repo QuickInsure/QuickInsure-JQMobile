@@ -92,6 +92,25 @@ function showMessage(message, callback, title, buttonName) {
     }
 }
 
+
+function renewPolicy(clickObject) {
+	if (checkConnection()) {
+	}
+	else {
+		//if (device.platform == "Android") {
+		    //window.plugins.socialsharing.share(null, null, null, 'https://play.google.com/store/apps/details?id=com.clifford.eWarranty');
+		    window.plugins.socialsharing.shareViaSMS('Policy Renewal:\n'+clickObject.data('renewal'), '0612345678', null);
+		/*}
+		else if (device.platform == "iOS") {
+		    window.plugins.socialsharing.setIPadPopupCoordinates(clickObject.offset().left + ',' + clickObject.offset().top + ',' + clickObject.width() + ',' + clickObject.height());
+		    window.plugins.socialsharing.share(null, null, null, 'https://itunes.apple.com/in/app/hopeless-2-cave-escape/id1048438762?mt=8');
+		}
+		else if (device.platform == "WinCE" || device.platform == "Win32NT") {
+		    window.plugins.socialsharing.share(null, null, null, 'http://www.windowsphone.com/<language>-<country>/store/app/<app-name>/<app-id>');   
+		}*/		
+	}
+}
+
 //Function to get data from online server if connected
 function getData(pageID, module, action, dataID) {
     if (checkConnection()) {
@@ -140,7 +159,6 @@ function submitForm(dataObject, formData, formID) {
      console.log(formData+"formData");
     
 	if (formID =="carQuoteForm" ){
-       // console.log()
 		$("#carQuoteDialog").popup("open");
 		return false;
 	}
@@ -148,9 +166,9 @@ function submitForm(dataObject, formData, formID) {
 		$("#carQuoteDialog").popup("open");
 		return false;
     }
-    else if (formID =="loginForm") {
+    /*else if (formID =="loginForm") {
         $.mobile.navigate(redirecturl); return false;
-    }
+    }*/
     
     var request = new MFPRequest("/"+module+"/"+action, MFPRequest.POST);
     request.setQueryParameters(formData);
@@ -173,14 +191,26 @@ function submitForm(dataObject, formData, formID) {
                 	showMessage("Invalid User!", null, null, null);
                 }
                 else {
-                    if (response[0].code == 200) {
-                        var summaryString = "<p>Customer ID: " + response[1].custid + "</p>";
-                        summaryString += "<p>Account No.: " + response[1].accountno + "</p>";
-                        summaryString += "<p>Account Type: " + response[1].accounttype + "</p>";
-                        summaryString += "<p>Balance: " + response[1].balance + "</p>";
-                        summaryString += "<p>Mobile No.: " + response[1].mobileno + "</p>";
+                    if (response.code == 200) {
+                        var summaryString = "<p>Customer ID: " + response.userData.custid + "</p>";
+                        summaryString += "<p>Account No.: " + response.userData.accountno + "</p>";
+                        summaryString += "<p>Account Type: " + response.userData.accounttype + "</p>";
+                        summaryString += "<p>Balance: " + response.userData.balance + "</p>";
+                        summaryString += "<p>Mobile No.: " + response.userData.mobileno + "</p>";
+
+                        summaryString += "<h3>Policy Details</h3>";
+                        summaryString += "<p>Product: " + response.policyData.product + "</p>";
+                        summaryString += "<p>Policy End Date: " + response.policyData.policy_end_date + "</p>";
+                        summaryString += "<p>Total Premium: " + response.policyData.total_premium_amt + "</p>";
+                        renewalString = "Insured:"+response.policyData.insured_name+"|Product:"+response.policyData.product+"|Mobile:"+response.policyData.mobile_no+"|Email:"+response.policyData.email_id+"|Expiry:"+response.policyData.policy_end_date+"|DOB:"+response.policyData.dob+"|Address:"+response.policyData.resident_add+","+response.policyData.state+","+response.policyData.pincode+"|Renew For:1 year";
+                        summaryString += "<button class='ui-btn ui-btn-inline renew-button' data-renewal='"+renewalString+"'>Renew</button>";
                         $("#account_details").append(summaryString);
                     	
+						//Code to implement policy renew functionality
+						$(".renew-button").off("click").on("click", function(){
+							renewPolicy($(this));
+						});
+
                     	$.mobile.navigate(redirecturl);
                     }
                     else {
@@ -190,12 +220,17 @@ function submitForm(dataObject, formData, formID) {
                 }
             }
             else if (formID == "mapForm") {
-                alert(successResponse.responseText);
                 map.clear();
                 $.each(response, function(branchName, branchData) {
+                    var snippet;
+                    if (branchData.ifsc)
+                        snippet = "Address: "+branchData.address+"\nIFSC Code: "+branchData.ifsc+"\nPhone No.: "+branchData.phoneno;
+                    else
+                        snippet = "Address: "+branchData.address+"\nPhone No.: "+branchData.phoneno;
 					map.addMarker({
 						'position': new plugin.google.maps.LatLng(branchData.lattitude, branchData.longitude),
-						'title': branchName
+                        'title': branchName,
+                        'snippet': snippet
 					});
                 });
             }
@@ -455,21 +490,6 @@ $(document).on('pageinit', function() {
     	window.localStorage.clear();
         window.localStorage.setItem("tutorialFl", "true");
    		$.mobile.navigate("#preLogin"); 	
-    });
-
-
-    //Code to implement app sharing functionality
-    $(".shareButton").off("click").on("click", function(event){
-        if (device.platform == "Android") {
-            window.plugins.socialsharing.share(null, null, null, 'https://play.google.com/store/apps/details?id=com.clifford.eWarranty');
-        }
-        else if (device.platform == "iOS") {
-            window.plugins.socialsharing.setIPadPopupCoordinates($(this).offset().left + ',' + $(this).offset().top + ',' + $(this).width() + ',' + $(this).height());
-            window.plugins.socialsharing.share(null, null, null, 'https://itunes.apple.com/in/app/hopeless-2-cave-escape/id1048438762?mt=8');
-        }
-        else if (device.platform == "WinCE" || device.platform == "Win32NT") {
-            window.plugins.socialsharing.share(null, null, null, 'http://www.windowsphone.com/<language>-<country>/store/app/<app-name>/<app-id>');   
-        }
     });
 
 
