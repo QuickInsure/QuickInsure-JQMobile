@@ -58,10 +58,6 @@ var networkErrorMessage = 'Network error! Please try again.';
 })(jQuery);
 
 
-$(function() {
-$("#datepicker").datepicker();
-});
-
 //Function to check for network connectivity
 function checkConnection() {
     if (typeof navigator.connection === 'undefined') {
@@ -312,7 +308,6 @@ function onFail(message) {
     showMessage('Failed because: ' + message, null, null, null);
 }
 /*-----------Camera callback functions end-----------*/
-
 function getEapp(){
 //alert("going to eapp")
 redirecturl = "#eapp"
@@ -516,22 +511,22 @@ $(document).on('pageinit', function() {
 		$("#mapForm").submit();
     });
 
-    var map = plugin.google.maps.Map.getMap();
-    map.on(plugin.google.maps.event.MAP_READY, function(map) {
-		var points = [
-			new plugin.google.maps.LatLng(19.33, 72.75),
-			new plugin.google.maps.LatLng(19.33, 73.08),
-			new plugin.google.maps.LatLng(18.88, 72.75),
-			new plugin.google.maps.LatLng(18.88, 73.08)
-		];
-		var latLngBounds = new plugin.google.maps.LatLngBounds(points);
+  //   var map = plugin.google.maps.Map.getMap();
+  //   map.on(plugin.google.maps.event.MAP_READY, function(map) {
+		// var points = [
+		// 	new plugin.google.maps.LatLng(19.33, 72.75),
+		// 	new plugin.google.maps.LatLng(19.33, 73.08),
+		// 	new plugin.google.maps.LatLng(18.88, 72.75),
+		// 	new plugin.google.maps.LatLng(18.88, 73.08)
+		// ];
+		// var latLngBounds = new plugin.google.maps.LatLngBounds(points);
 
-		map.animateCamera({
-			'target' : latLngBounds
-		});
+		// map.animateCamera({
+		// 	'target' : latLngBounds
+		// });
 
-        var div = document.getElementById('map_canvas');
-        map.setDiv(div);
-    });
-
+  //       var div = document.getElementById('map_canvas');
+  //       map.setDiv(div);
+  //   });
+    /*-----------Miscellaneous Events end-----------*/
 });
