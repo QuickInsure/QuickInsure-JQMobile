@@ -1,4 +1,4 @@
-<div data-role="popup" id="carQuoteDialog" style="min-height:90%;">
+<div data-role="popup" id="carQuoteDialog" style="min-height:90%;" data-history= "false">
     <div data-role="header" data-theme="b" role="banner" class="ui-header ui-bar-b">
         <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-left" data-rel="back">Close</a>
         <h1 class="quote-title" role="heading" aria-level="1" style="margin:0 200px !important">Here is your quote!</h1>
@@ -7,8 +7,13 @@
     <div role="main" class="ui-content" id="myDialog">
         <div class="content"></div>
         <h1 claas="quotePrice"></h1>
-        <p>Rs 5000</p>
-        <a href="dialog/index.html" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-a">Buy Policy</a>
-        <a href="dialog/index.html" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-a">Cancel</a>
+        <p style="font-size: 100px">Rs 5000</p>
+        <a href= "#" data-role="button" onclick= "getEapp(this)" data-redirecturl="#eapp" class="ui-btn ui-shadow ui-corner-all ui-btn-a">Buy Policy</a>
     </div>
 </div>
+
+<script type="text/javascript">
+console.log($("#quoteamt").text);
+var premium = "100"
+$("#quoteamt").text(premium);
+</script>

@@ -116,7 +116,54 @@
 				</div>
 			</div>
 		</div>
+		<!--eapp starts here-->
+		<div data-role="page" id="eapp">
+			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
+			</div>
 
+			<nd2-include data-src="fragments/quote.dialog.html"></nd2-include>
+
+			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
+				<a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
+				<h1 class="wow fadeIn" data-wow-delay='0.4s'>QuickInsure</h1>
+
+				<ul data-role="nd2tabs" data-swipe="true">
+				  <li data-tab="account" data-tab-active="true">Vehicle Details</li>
+				  <li data-tab="discount">Discounts/Additional Covers</li>
+				  <li data-tab="owner">Owner Details</li>
+				  <li data-tab="nominee">Nominee Details</li>
+				  <li data-tab="other">Final Illustration</li>
+				  <li data-tab="payment">Payment details</li>	
+				</ul>
+			</div>
+
+			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
+				
+				<div data-role="nd2tab" data-tab="account">
+					<form id="vehicalForm" name="vehicalForm" data-ajax="false" data-module="vehical" data-action="getVeicalDetails" data-transition="pop">
+						<nd2-include data-src="fragments/vehical.html"></nd2-include>
+			        </form>
+				</div>
+
+				<div data-role="nd2tab" data-tab="discount">
+					<form id="discountForm" name="discountForm" data-ajax="false" data-module="discount" data-action="getDiscount" data-transition="pop">
+						<nd2-include data-src="fragments/discount.html"></nd2-include>
+			        </form>
+				</div>
+
+				<div data-role="nd2tab" data-tab="owner">
+					<form id="ownerForm" name="ownerForm" data-ajax="false" data-module="owner" data-action="getOwnerDetails" data-transition="pop">
+						<nd2-include data-src="fragments/owner.html"></nd2-include>
+					</form>
+				</div>
+				<div data-role="nd2tab" data-tab="nominee">
+					<form id="nomineeForm" name="nomineeForm" data-ajax="false" data-module="nominee" data-action="getNomineeDetails" data-transition="pop">
+						<nd2-include data-src="fragments/nominee.html"></nd2-include>
+					</form>
+				</div
+			</div>
+		</div>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
