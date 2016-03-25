@@ -197,6 +197,7 @@ function submitForm(dataObject, formData, formID) {
 					});
                 });
             }
+
         }, 
         function (failureResponse){
             alert("errorCode :: " + failureResponse.errorCode);
@@ -271,7 +272,15 @@ function onFail(message) {
     showMessage('Failed because: ' + message, null, null, null);
 }
 /*-----------Camera callback functions end-----------*/
-
+function getEapp(){
+//alert("going to eapp")
+redirecturl = "#eapp"
+console.log("fffff"+redirecturl)
+//location.href="www/fragments/eapp.html"
+$.mobile.navigate(redirecturl); 
+//event.preventDefault;
+return false;
+}
 
 //Equivalent to JQuery $(document).ready()
 $(document).on('pageinit', function() {
@@ -404,7 +413,7 @@ $(document).on('pageinit', function() {
             messages: {
                 Cust_Pass: {
                     minlength: "Password should be minimum of 8 characters",
-                    maxlength: "Password should be maximum of 20 characters"
+                    maxlength: "Password should not be maximum of 20 characters"
                 }
             },
             errorPlacement: function (error, element) {
@@ -481,22 +490,22 @@ $(document).on('pageinit', function() {
 		$("#mapForm").submit();
     });
 
-    //var map = plugin.google.maps.Map.getMap();
-    map.on(plugin.google.maps.event.MAP_READY, function(map) {
-		var points = [
-			new plugin.google.maps.LatLng(19.33, 72.75),
-			new plugin.google.maps.LatLng(19.33, 73.08),
-			new plugin.google.maps.LatLng(18.88, 72.75),
-			new plugin.google.maps.LatLng(18.88, 73.08)
-		];
-		var latLngBounds = new plugin.google.maps.LatLngBounds(points);
+  //   var map = plugin.google.maps.Map.getMap();
+  //   map.on(plugin.google.maps.event.MAP_READY, function(map) {
+		// var points = [
+		// 	new plugin.google.maps.LatLng(19.33, 72.75),
+		// 	new plugin.google.maps.LatLng(19.33, 73.08),
+		// 	new plugin.google.maps.LatLng(18.88, 72.75),
+		// 	new plugin.google.maps.LatLng(18.88, 73.08)
+		// ];
+		// var latLngBounds = new plugin.google.maps.LatLngBounds(points);
 
-		map.animateCamera({
-			'target' : latLngBounds
-		});
+		// map.animateCamera({
+		// 	'target' : latLngBounds
+		// });
 
-        var div = document.getElementById('map_canvas');
-        map.setDiv(div);
-    });
+  //       var div = document.getElementById('map_canvas');
+  //       map.setDiv(div);
+  //   });
     /*-----------Miscellaneous Events end-----------*/
 });
