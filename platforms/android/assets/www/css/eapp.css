@@ -1,0 +1,5 @@
+ul#menu li{
+	display: inline;
+	padding: 2%;
+	border: 2px solid gray;
+}

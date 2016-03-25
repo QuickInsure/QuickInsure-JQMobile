@@ -237,6 +237,7 @@ function submitForm(dataObject, formData, formID) {
 					});
                 });
             }
+
         }, 
         function (failureResponse){
             alert("errorCode :: " + failureResponse.errorCode);
@@ -321,6 +322,7 @@ $.mobile.navigate(redirecturl);
 //event.preventDefault;
 return false;
 }
+
 //Equivalent to JQuery $(document).ready()
 $(document).on('pageinit', function() {
     FastClick.attach(document.body);
@@ -452,7 +454,7 @@ $(document).on('pageinit', function() {
             messages: {
                 Cust_Pass: {
                     minlength: "Password should be minimum of 8 characters",
-                    maxlength: "Password should be maximum of 20 characters"
+                    maxlength: "Password should not be maximum of 20 characters"
                 }
             },
             errorPlacement: function (error, element) {
@@ -531,5 +533,5 @@ $(document).on('pageinit', function() {
         var div = document.getElementById('map_canvas');
         map.setDiv(div);
     });
-    /*-----------Miscellaneous Events end-----------*/
+
 });

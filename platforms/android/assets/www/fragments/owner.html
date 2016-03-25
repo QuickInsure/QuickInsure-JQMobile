@@ -1,0 +1,111 @@
+<div class="row" id="OwnerDetails">
+	<div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="box" id="genderDetails">
+            <div class="ui-field-contain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>Gender:</legend>
+                    <input type="radio" name="ownerGender" id="ownerGender_yes" value="YES" checked="checked">
+                    <label for="ownerGender_yes">One</label>
+                    <input type="radio" name="ownerGender" id="ownerGender_no" value="NO">
+                    <label for="ownerGender_no">Two</label>
+                    <!-- <input type="radio" name="ownerGender" id="ownerGenderc" value="other">
+                    <label for="ownerGenderc">Three</label> -->
+                </fieldset>
+            </div>
+        </div>
+		<div class="box" id="maritialStatus">
+            <div class="ui-field-contain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>Married:</legend>
+                    <input type="radio" name="married" id="married_yes" value="YES" checked="checked">
+                    <label for="married_yes">One</label>
+                    <input type="radio" name="married" id="married_no" value="NO">
+                    <label for="married_no">Two</label>
+                    <!-- <input type="radio" name="ownerGender" id="ownerGenderc" value="other">
+                    <label for="ownerGenderc">Three</label> -->
+                </fieldset>
+            </div>
+    	</div>
+        <div class="box" id="birthDetails">
+            <div class="ui-field-contain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>Date Of Birth:</legend>
+                     <select name="dobDate" id="dobDate">
+                    </select>
+                     <select name="dobMonth" id="dobMonth">
+                    </select>
+                    <select name="dobYear" id="dobYear">
+                    </select>
+                </fieldset>
+            </div>
+        </div>
+        <div class="box" id="addressDetails">
+<!--             <div class="ui-field-contain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>Pin Code:</legend>
+                     <select name="pinCode" id="pinCode">
+                    </select>
+                     <select name="area" id="area">
+                    </select>
+                    <select name="dobYear" id="dobYear">
+                    </select>
+                </fieldset>
+            </div> -->
+            <div class="ui-field-contain">
+                <label for="pinCode">Pin Code:</label>
+                <input type="text" name="pinCode" id="pinCode" placeholder="Pin Code" value="">
+            </div>
+            <div class="ui-field-contain">
+                <label for="houseNumber">House Number:</label>
+                <input type="text" name="houseNumber" id="houseNumber" placeholder="House Number" value="">
+            </div>
+            <div class="ui-field-contain">
+                <label for="buildingName">Building Name:</label>
+                <input type="text" name="buildingName" id="buildingName" placeholder="Building Name" value="">
+            </div>
+            <div class="ui-field-contain">
+                <label for="streetName">Street Name:</label>
+                <input type="text" name="streetName" id="streetName" placeholder="Street Name" value="">
+            </div>
+            <div class="ui-field-contain">
+                <label for="landMark">Land Mark:</label>
+                <input type="text" name="landMark" id="landMark" placeholder="Land Mark" value="">
+            </div>
+        </div>
+        <br>
+        <br>
+	</div>
+</div>
+<br>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <input type="submit" class="ui-btn" value="View Quote">
+    </div>
+</div>
+
+<script type="text/javascript">
+    var max = 12;
+    //max = 100,
+   // select = $("#dobMonth");
+   var montharray=['MONTH','JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST','SEPTEMBER','OCTOBER', 'NOVEMBER','DECEMBER']
+
+for (var i = 0; i<=max; i++){
+    $('#dobMonth').append($('<option>', {
+    value: i,
+    text: montharray[i]
+}));
+}
+for (var i = 1; i<=31; i++){
+    $('#dobDate').append($('<option>', {
+    value: i,
+    text: i
+}));
+}
+
+for (var i = 1990; i<=2016; i++){
+    $('#dobYear').append($('<option>', {
+    value: i,
+    text: i
+}));
+}
+</script>
