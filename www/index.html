@@ -11,7 +11,6 @@
 		<link rel="stylesheet" href="vendor/wow/animate.css" />
 		<link rel="stylesheet" href="css/nativedroid2.css" />
 		<link rel="stylesheet" href="css/custom.css" />
-		<link rel="stylesheet" href="jquery.ui.datepicker.mobile.css" />
 
 		<meta name="mobile-web-app-capable" content="yes">
 	 	<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -117,6 +116,7 @@
 				</div>
 			</div>
 		</div>
+
 		<!--eapp starts here-->
 		<div data-role="page" id="eapp">
 			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
@@ -131,10 +131,10 @@
 
 				<ul data-role="nd2tabs" data-swipe="true">
 				  <li data-tab="account" data-tab-active="true">Vehicle Details</li>
-				  <li data-tab="discount">Discounts</li>
+				  <li data-tab="discount">Discounts/Additional Covers</li>
 				  <li data-tab="owner">Owner Details</li>
 				  <li data-tab="nominee">Nominee Details</li>
-				  <li data-tab="other">Other Details</li>
+				  <li data-tab="other">Final Illustration</li>
 				  <li data-tab="payment">Payment details</li>	
 				</ul>
 			</div>
@@ -165,7 +165,7 @@
 				</div>
 
 				<div data-role="nd2tab" data-tab="payment">
-					<form id="paymentForm" name="payment" data-ajax="false" data-module="payment" data-action="getPaymentDetails" data-transition="pop">
+					<form id="paymentForm" name="paymentForm" data-ajax="false" data-module="payment" data-action="getPaymentdetails" data-transition="pop">
 						<nd2-include data-src="fragments/payment.html"></nd2-include>
 					</form>
 				</div>
@@ -173,7 +173,7 @@
 			</div>
 		</div>
 		<!--eapp ends here-->
-		</div>
+
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui.min.js"></script>

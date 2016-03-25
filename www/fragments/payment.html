@@ -3,8 +3,21 @@
       <div id= "payment-details">
         <label for="sumAssured">Enter the amount you want to pay in Rs.</label>
         <input type="text" name="sumAssured" id="sumAssured" value="" data-clear-btn="true" placeholder="Amount to be paid" class="required"/>
-        <label for="paymentDate">Enter the payment date</label>
-        <input data-role="date" data-inline="true" name="paymentDate" id= "datepicker" type="text">
+        <!-- <label for="paymentDate">Enter the payment date</label>
+        <input data-role="date" data-inline="true" name="paymentDate" id= "datepicker" type="text"> -->
+        <div class="box" id="birthDetails">
+            <div class="ui-field-contain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>Payment Date:</legend>
+                     <select name="paymentDate" id="paymentDate">
+                    </select>
+                     <select name="dobMonthpaymentMonth" id="paymentMonth">
+                    </select>
+                    <select name="dobYearpaymentYear" id="paymentYear">
+                    </select>
+                </fieldset>
+            </div>
+        </div>
       </div>     
 
 	</div>
@@ -16,3 +29,29 @@
         <input type="submit" class="ui-btn" value="Pay">
     </div>
 </div>
+<script type="text/javascript">
+    var max = 12;
+    //max = 100,
+   // select = $("#dobMonth");
+   var montharray=['MONTH','JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST','SEPTEMBER','OCTOBER', 'NOVEMBER','DECEMBER']
+
+for (var i = 0; i<=max; i++){
+    $('#paymentMonth').append($('<option>', {
+    value: i,
+    text: montharray[i]
+}));
+}
+for (var i = 1; i<=31; i++){
+    $('#paymentDate').append($('<option>', {
+    value: i,
+    text: i
+}));
+}
+
+for (var i = 1990; i<=2016; i++){
+    $('#paymentYear').append($('<option>', {
+    value: i,
+    text: i
+}));
+}
+</script>
