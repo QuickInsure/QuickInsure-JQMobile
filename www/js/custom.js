@@ -186,6 +186,34 @@ function submitForm(dataObject, formData, formID) {
 					});
                 });
             }
+            else if(formID == 'carQuoteForm'){
+                alert("api for car quote")
+                if(response[0].code==200){
+                    alert(response[1].eamil_id+"<<my email");
+                     var premium = 100;
+                var tpPremium = 20;
+                var totalPremium=0;
+                var NCBVal = 0;
+                var NCB = $('input[name="carQuoteNoclaim"]:checked').val();
+                if(NCB == 'YES'){
+                   // alert("yes")
+                    NCBVal = 5;
+                    totalPremium = (premium + tpPremium)- NCBVal;
+                 //   alert(totalPremium)
+                }else{
+                 //   alert("no")
+                    NCBVal = 0;
+                    totalPremium = (premium + tpPremium)- NCBVal;
+                 //   alert(totalPremium);
+                }
+                
+                $( "#carQuoteDialog" ).on( "popupbeforeposition", function( event, ui ) {
+                    console.log(totalPremium+"><><><>")
+                   $( "p:first" ).text(parseInt(totalPremium)+" Rs"); 
+                } );
+            $("#carQuoteDialog").popup("open");
+                }
+            }
 
         }, 
         function (failureResponse){
