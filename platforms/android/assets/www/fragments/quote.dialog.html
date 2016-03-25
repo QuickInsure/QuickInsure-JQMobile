@@ -1,4 +1,4 @@
-<div data-role="popup" id="carQuoteDialog" style="min-height:90%;" data-history= "false">
+ <div data-role="popup" id="carQuoteDialog" style="min-height:90%;" data-history= "false">
     <div data-role="header" data-theme="b" role="banner" class="ui-header ui-bar-b">
         <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-left" data-rel="back">Close</a>
         <h1 class="quote-title" role="heading" aria-level="1" style="margin:0 200px !important">Here is your quote!</h1>
@@ -6,7 +6,19 @@
 
     <div role="main" class="ui-content" id="myDialog">
         <div class="content"></div>
-        <h1 claas="quotePrice"></h1>
+            <div class="ui-field-contain">
+                <label for="quoteIDV">(IDV)</label>
+                <input type="text" name="quoteIDVValue" id="quoteIDVValue"  value="">
+            </div>
+            <div class="ui-field-contain">
+                <label for="pinCode">NCB Value</label>
+                <input type="text" name="quoteNCBValue" id="quoteNCBValue"  value="">
+            </div>
+             <div class="ui-field-contain">
+                <label for="quoteTPValue">TP Premium</label>
+                <input type="text" name="quoteTPValue" id="quoteTPValue"  value="">
+            </div>
+        <!-- </div> -->
         <p style="font-size: 100px">Rs 5000</p>
         <a href= "#" data-role="button" onclick= "getEapp(this)" data-redirecturl="#eapp" class="ui-btn ui-shadow ui-corner-all ui-btn-a">Buy Policy</a>
     </div>

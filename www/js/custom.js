@@ -286,7 +286,6 @@ $(document).on("pagecreate", function() {
     });
 });
 
-
 /*-----------Camera callback functions start-----------*/
 function onBillScanSuccess(imageData) {
     $("#billCopyPopup img").attr("src", "data:image/jpeg;base64," + imageData);
@@ -401,6 +400,12 @@ $(document).on('pageinit', function() {
             showMessage("Please select an image with size less than 2MB.", null, null, null);
         }
     });
+
+        $(".car-list").on("click", function(){
+            console.log("fsdjfhsdjfs");
+        });    
+
+
 
 
     //Cancel image clears the file input and closes the popup

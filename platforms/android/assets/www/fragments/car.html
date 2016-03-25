@@ -2,7 +2,19 @@
 	<div class="col-xs-12 col-sm-6 col-md-4">
 		<div class="box">
 			<label for="carname">Car Name:</label>
-    		<input type="text" name="carname" id="carname" value="" data-clear-btn="true" placeholder="Car Name" class="required">
+            <form class= "ui-filterable">
+<!--     		   <input type="text" name="carname" id="carname" value="" data-clear-btn="true" placeholder="Car Name" class="required"> -->
+                <input id= "car-search-input" name= "carname" placeholder= "Car Name.." class= "required">
+            </form>   
+            <ul data-role= "listview" id= "car-list" data-filter= "true" data-filter-reveal= "true" data-input= "#car-search-input">
+                <li><a class= "car-list" href="#">Aston Martin DB9</a></li>
+                <li class= "car-list"><a href= "#">Aston Martin DBS</a>
+                <li class= "car-list"><a href= "#">Aston Martin Rapide</a>
+                <li class= "car-list"><a href= "#">Aston Martin Vanquish</a>
+                <li class= "car-list"><a href= "#">Bentley Arange</a>
+                <li class= "car-list"><a href= "#">Chevrolet Convertible</a>
+                <li class= "car-list"><a href= "#">Fiat Bravo</a>    
+            </ul>   
 
 			<label for="registrationNum">Car Registration Number:</label>
     		<input type="text" name="registrationNum" id="registrationNum" value="" data-clear-btn="true" placeholder="Car Registration Number" class="required">
@@ -26,12 +38,10 @@
             </select>
     	</div>
         <br>
-        <div data-role="rangeslider" data-track-theme="b" data-theme="a">
-            <!-- <label for="range-3a">Rangeslider:</label> -->
+<!--         <div data-role="rangeslider" data-track-theme="b" data-theme="a">
             <input type="range" name="range-3a" id="range-3a" min="0" max="10000" value="0">
-            <!-- <label for="range-3b">Rangeslider:</label> -->
             <input type="range" name="range-3b" id="range-3b" min="0" max="10000" value="10000">
-        </div>
+        </div> -->
         <br>
         <div class="box">
             <label for="drivingarea" class="select">Driving Area</label>
@@ -55,6 +65,6 @@
 <br>
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4">
-        <input type="submit" class="ui-btn" value="View Quote">
+        <input type="submit" class="ui-btn submit-btn" value="View Quote">
     </div>
 </div>
