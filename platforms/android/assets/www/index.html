@@ -45,14 +45,15 @@
 		</div>
 
 		<div data-role="page" id="dashboard">
-			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+			<div data-role="panel" id="bottomsheetDashboard" data-animate="false" data-position='bottom' data-display="overlay">
 				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
 			</div>
 
 			<nd2-include data-src="fragments/quote.dialog.html"></nd2-include>
+			<nd2-include data-src="fragments/renewal.dialog.html"></nd2-include>
 
 			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
-				<a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
+				<a href="#bottomsheetDashboard" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
 				<h1 class="wow fadeIn" data-wow-delay='0.4s'>QuickInsure</h1>
 
 				<ul data-role="nd2tabs" data-swipe="true">
@@ -86,12 +87,9 @@
 
 
 		<div data-role="page" id="map">
-			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
-				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
-			</div>
 
 			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
-				<a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
+				<a href="#bottomsheetMap" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
 				<h1 class="wow fadeIn" data-wow-delay='0.4s'>QuickInsure</h1>
 			</div>
 
@@ -112,21 +110,24 @@
 								</div>
 							</div>
 						</div>
-					</form>					
+					</form>		
+					<div data-role="panel" id="bottomsheetMap" data-animate="false" data-position='bottom' data-display="overlay">
+						<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
+					</div>			
 				</div>
 			</div>
 		</div>
 
 		<!--eapp starts here-->
 		<div data-role="page" id="eapp">
-			<div data-role="panel" id="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+			<div data-role="panel" id="bottomsheetEAPP" data-animate="false" data-position='bottom' data-display="overlay">
 				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
 			</div>
 
 			<nd2-include data-src="fragments/quote.dialog.html"></nd2-include>
 
 			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
-				<a href="#bottomsheet" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
+				<a href="#bottomsheetEAPP" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
 				<h1 class="wow fadeIn" data-wow-delay='0.4s'>QuickInsure</h1>
 
 				<ul data-role="nd2tabs" data-swipe="true">
