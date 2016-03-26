@@ -6,10 +6,6 @@
 	margin: 0 30px;
 }
 
-.bottomsheet {
-	z-index: 99999999;
-}
-
 .ui-input-btn {
 	background-color: #ff5722 !important;
     color: white !important;

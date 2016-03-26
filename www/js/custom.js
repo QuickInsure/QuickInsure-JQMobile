@@ -221,43 +221,39 @@ function submitForm(dataObject, formData, formID) {
             	}
             }
             else if(formID == 'carQuoteForm'){
-                alert("api for car quote")
                 if(response[0].code == 200){
-					alert(response[1].email_id+"<<my email");
 					var premium = parseInt(response[1].premium);
 					var tpPremium = 1000;
 					var totalPremium = 0;
 					var NCBVal = 0;
-					var NCB = $('input[name="carQuoteNoclaim"]:checked').val();
+					var NCB = formData.carQuoteNoclaim;
 					if(NCB == 'YES'){
 						NCBVal = 500;
-						totalPremium = (premium + tpPremium)- NCBVal;
-						alert(totalPremium+" if yes");
+						totalPremium = (premium + tpPremium) - NCBVal;
 					}
 					else {
-						NCBVal = 0;
-						totalPremium = (premium + tpPremium)- NCBVal;
-						alert(totalPremium+" if no");
+						totalPremium = (premium + tpPremium) - NCBVal;
 					}
                 
-					$("#carQuoteDialog").on("popupbeforeposition", function(event, ui){
-						$("#bhenchod").text(totalPremium); 
-						$("#quoteNCBValue").val(parseInt(totalPremium)); 
-						$("#quoteTPValue").val(tpPremium)
-						$("#quoteIDVValue").val(response[1].idv);
-					});
-						("#carQuoteDialog").popup("open");
-					$( "#carQuoteDialog" ).on( "popupafterclose", function( event, ui ) {
+					// $("#carQuoteDialog").on("popupbeforeposition", function(event, ui){
+					$("#carQuoteDialog #premium").html(totalPremium); 
+					$("#carQuoteDialog #quoteNCBValue").html(parseInt(totalPremium)); 
+					$("#carQuoteDialog #quoteTPValue").html(tpPremium)
+					$("#carQuoteDialog #quoteIDVValue").html(response[1].idv);
+					// });
+					$("#carQuoteDialog").popup("open");
+					/*$("#carQuoteDialog").on("popupafterclose", function(event, ui) {
 						redirecturl = "#eapp"
-                	});
-					$.mobile.navigate(redirecturl);
+                	});*/
             		$.mobile.loading("hide");
+					//$.mobile.navigate(redirecturl);
             		return false;
                 }
             }
         }, 
         function (failureResponse){
-        	alert(failureResponse);
+        	// alert(failureResponse);
+        	showMessage(failureResponse.errorDescription, null, null, null);
             /*alert("errorCode :: " + failureResponse.errorCode);
             alert("status:: " + failureResponse.status);
             alert("errorDescription :: " + failureResponse.errorDescription);*/

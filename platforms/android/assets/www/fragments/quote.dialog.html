@@ -7,32 +7,31 @@
     color: #FF704C;
   }
   </style>
- <div data-role="popup" id="carQuoteDialog" style="min-height:90%;" data-history= "false">
+
+<div data-role="popup" id="carQuoteDialog" style="min-height:90%;" data-history= "false">
     <div data-role="header" data-theme="b" role="banner" class="ui-header ui-bar-b">
-        <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-left" data-rel="back">Close</a>
-        <h1 class="quote-title" role="heading" aria-level="1" style="margin:0 200px !important">Here is your quote!</h1>
+        <h1 role="heading" aria-level="1">Here is your quote!</h1>
     </div>
 
-    <div role="main" class="ui-content" id="myDialog">
-        <!-- <div class="content"></div> -->
-            <div class="ui-field-contain">
-            <fieldset data-role="controlgroup" data-type="horizontal">
-             <legend>Insured Declared Value(IDV):</legend>
-                <input type="text" name="quoteIDVValue" id="quoteIDVValue"  value="">
-                </fieldset>
-            </div>
-            <div class="ui-field-contain">
-                <label for="pinCode">NCB Value</label>
-                <input type="text" name="quoteNCBValue" id="quoteNCBValue"  value="">
-            </div>
-             <div class="ui-field-contain">
-                <label for="quoteTPValue">TP Premium</label>
-                <input type="text" name="quoteTPValue" id="quoteTPValue"  value="">
-            </div>
-        <!-- </div> -->
+    <div role="main" class="ui-content">
+		<div class="ui-grid-a">
+    		<div class="ui-block-a"><b>Insured Declared Value(IDV):</b></div>
+    		<div class="ui-block-b" id="quoteIDVValue"></div>
+
+    		<div class="ui-block-a">NCB Value:</div>
+    		<div class="ui-block-b" id="quoteNCBValue"></div>
+
+    		<div class="ui-block-a">TP Premium:</div>
+    		<div class="ui-block-b" id="quoteTPValue"></div>
+		
+    		<div class="ui-block-solo"><p style="font-size: 100px" id="premium"></p></div>
         
-        <p style="font-size: 100px" id="bhenchod"></p>
-        <!-- <b style="font-size: 100px">Rs</b> -->
-        <a href= "#" data-role="button" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-a">Buy Policy</a>
+    		<div class="ui-block-a">
+    			<a href= "#eapp" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-a">Buy Policy</a>
+    		</div>
+    		<div class="ui-block-b">
+    			<a href="#" data-role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-left" data-rel="back">Close</a>		
+    		</div>
+    	</div>	
     </div>
 </div>

@@ -1,0 +1,23 @@
+<div class="nd2-card">
+	<div class="card-media">
+		<img src="img/cashless_new.jpg">
+	</div>
+
+	<div class="card-action">
+		<div class="row between-xs">
+			<div class="col-xs-12 align-right">
+				<div class="box">
+					<a class="ui-btn ui-btn-inline ui-btn-fab waves-effect waves-button shareButton" href="#" data-url="www/img/cashless_new.jpg" data-message="ICICI - Cashless Transactions"><i class="zmdi zmdi-share"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".shareButton").off("click").on("click", function(event){
+        	window.plugins.socialsharing.share($(this).data("message"), $(this).data("message"), $(this).data("url"));
+        });
+	});
+</script>

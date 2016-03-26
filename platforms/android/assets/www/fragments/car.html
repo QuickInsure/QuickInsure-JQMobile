@@ -1,19 +1,16 @@
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4">
         <div class="box">
-            <div class="ui-field-contain">
-                <label for="carname">Car Name:</label>
-                <input type="text" name="carname" id="carname" value="" data-clear-btn="true" placeholder="Car Name" class="required">
-            </div>
-            <div class="ui-field-contain">
-                <label for="registrationNum">Car Registration Number:</label>
-                <input type="text" name="registrationNum" id="registrationNum" value="" data-clear-btn="true" placeholder="Car Registration Number" class="required">
-            </div>
+			<label for="carname">Car Name:</label>
+			<input type="text" name="carname" id="carname" value="" data-clear-btn="true" placeholder="Car Name" class="required">
+			
+			<label for="registrationNum">Car Registration Number:</label>
+			<input type="text" name="registrationNum" id="registrationNum" value="" data-clear-btn="true" placeholder="Car Registration Number" class="required">
         </div>
+
         <div class="box">
-        <div class="ui-field-contain">
             <fieldset data-role="controlgroup" data-type="horizontal">
-                <legend>Year Of registration:</legend>
+                <legend>Year of Registration:</legend>
                     <select name="regYear" id="regYear">
                         <option value="2016">2016</option>
                         <option value="2015">2015</option>
@@ -22,10 +19,9 @@
                         <option value="2012">2012</option>
                     </select>
             </fieldset>
-        </div>
-        <div class="ui-field-contain">
+
             <fieldset data-role="controlgroup" data-type="horizontal">
-                <legend>Fuel Type</legend>
+                <legend>Fuel Type:</legend>
                     <select name="fuelType" id="fuelType">
                         <option value="Petrol">Petrol</option>
                         <option value="Diesel">Diesel</option>
@@ -33,32 +29,21 @@
                     </select>
             </fieldset>
         </div>
-        </div>
-        <br>
-<!--         <div data-role="rangeslider" data-track-theme="b" data-theme="a">
-            <input type="range" name="range-3a" id="range-3a" min="0" max="10000" value="0">
-            <input type="range" name="range-3b" id="range-3b" min="0" max="10000" value="10000">
-        </div> -->
-        <br>
+
         <div class="box">
-                <!-- <div class="box"> -->
-            <div class="ui-field-contain">
             <fieldset data-role="controlgroup" data-type="horizontal">
-            <legend>No claim bonus:</legend>
-            <!-- <label for="noClaimBonus">No Claim Bonus:</label> -->
+            	<legend>No claim bonus:</legend>
                 <input type="radio" name="carQuoteNoclaim" id="noclaim_yes" value="YES" checked="checked">
                 <label for="noclaim_yes">YES</label>
                 <input type="radio" name="carQuoteNoclaim" id="noclaim_no" value="NO">
                 <label for="noclaim_no">NO</label>
             </fieldset>
-            </div>
-        <!-- </div> -->
         </div>
     </div>
 </div>
-<br>
+
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4">
-        <input type="submit" class="ui-btn submit-btn" value="View Quote">
+        <input type="submit" class="ui-btn-primary ui-btn-raised clr-primary waves-effect waves-button" value="View Quote">
     </div>
 </div>
