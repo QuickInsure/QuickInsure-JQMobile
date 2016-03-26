@@ -19,20 +19,10 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         BMSClient.initialize("http://qi.au-syd.mybluemix.net", "542f2cb5-9b79-4162-b0a8-d7b4c835e6fe");
-        var points = [
-			new plugin.google.maps.LatLng(19.33, 72.75),
-			new plugin.google.maps.LatLng(19.33, 73.08),
-			new plugin.google.maps.LatLng(18.88, 72.75),
-			new plugin.google.maps.LatLng(18.88, 73.08)
-		];
-		var latLngBounds = new plugin.google.maps.LatLngBounds(points);
         map = plugin.google.maps.Map.getMap({
         	'backgroundColor': 'white',
         	'mapType': plugin.google.maps.MapTypeId.ROADMAP,
 			'controls': {
-				// 'compass': true,
-				// 'myLocationButton': true,
-				// 'indoorPicker': true,
 				'zoom': true
 			},
 			'gestures': {
@@ -43,9 +33,7 @@ var app = {
 			},
 			'camera': {
 				'latLng': new plugin.google.maps.LatLng(19.079278, 72.879134),
-				// 'tilt': 30,
 				'zoom': 10,
-				// 'bearing': 50
 			}
         });
     },
@@ -139,14 +127,14 @@ function submitForm(dataObject, formData, formID) {
         console.log(field.name+"<-->"+field.value)
     });
     
-	if (formID =="carQuoteForm" ){
-		$("#carQuoteDialog").popup("open");
-		return false;
-	}
-	else if (formID =="bikeQuoteForm" ){
-		$("#carQuoteDialog").popup("open");
-		return false;
-    }
+	// if (formID =="carQuoteForm" ){
+	// 	$("#carQuoteDialog").popup("open");
+	// 	return false;
+	// }
+	// else if (formID =="bikeQuoteForm" ){
+	// 	$("#carQuoteDialog").popup("open");
+	// 	return false;
+ //    }
     /*else if (formID =="loginForm") {
         $.mobile.navigate(redirecturl); return false;
     }*/
@@ -159,12 +147,13 @@ function submitForm(dataObject, formData, formID) {
             var response = JSON.parse(successResponse.responseText);
             if (formID == "loginForm") {
                 if (response.status == "valid") {
-    				var summaryString = "<p>Name: " + response.data.name + "</p>";
-    				summaryString += "<p>Mobile No.: " + response.data.mobile + "</p>";
-    				summaryString += "<p>Email ID: " + response.data.email + "</p>";
-    				summaryString += "<p>Aadhar No.: " + response.data.aadhar + "</p>";
-    				summaryString += "<p>Gender: " + response.data.gender + "</p>";
-    				$("#account_details").append(summaryString);
+    				$("#noniciciProfile #name").html(response.data.name);
+    				$("#noniciciProfile #mobileNo").html(response.data.mobile);
+    				$("#noniciciProfile #emailID").html(response.data.email);
+    				$("#noniciciProfile #aadharNo").html(response.data.aadhar);
+    				$("#noniciciProfile #gender").html(response.data.gender);
+					$("#noniciciProfile").show();
+    				$("#iciciProfile").hide();
 
                     $.mobile.navigate(redirecturl);
                 }
@@ -173,19 +162,20 @@ function submitForm(dataObject, formData, formID) {
                 }
                 else {
                     if (response.code == 200) {
-                        var summaryString = "<p>Customer ID: " + response.userData.custid + "</p>";
-                        summaryString += "<p>Account No.: " + response.userData.accountno + "</p>";
-                        summaryString += "<p>Account Type: " + response.userData.accounttype + "</p>";
-                        summaryString += "<p>Balance: " + response.userData.balance + "</p>";
-                        summaryString += "<p>Mobile No.: " + response.userData.mobileno + "</p>";
-
-                        summaryString += "<h3>Policy Details</h3>";
-                        summaryString += "<p>Product: " + response.policyData.product + "</p>";
-                        summaryString += "<p>Policy End Date: " + response.policyData.policy_end_date + "</p>";
-                        summaryString += "<p>Total Premium: " + response.policyData.total_premium_amt + "</p>";
                         renewalString = "Policy Renewal:\nInsured:"+response.policyData.insured_name+"\nProduct:"+response.policyData.product+"\nMobile:"+response.policyData.mobile_no+"\nEmail:"+response.policyData.email_id+"\nExpiry:"+response.policyData.policy_end_date+"\nDOB:"+response.policyData.dob+"\nAddress:"+response.policyData.resident_add+","+response.policyData.state+","+response.policyData.pincode+"\nRenew For:1 year";
-                        summaryString += "<button class='ui-btn ui-btn-inline renew-button' data-renewal='"+renewalString+"' data-module='login' data-action='policyRenewal'>Renew</button>";
-                        $("#account_details").html(summaryString);
+
+	    				$("#iciciProfile #custID").html(response.userData.custid);
+	    				$("#iciciProfile #accountNo").html(response.userData.accountno);
+	    				$("#iciciProfile #accountType").html(response.userData.accounttype);
+	    				$("#iciciProfile #balance").html(response.userData.balance);
+	    				$("#iciciProfile #mobileNo").html(response.userData.mobileno);
+	    				$("#iciciProfile #product").html(response.policyData.product);
+	    				$("#iciciProfile #endDate").html(response.policyData.policy_end_date);
+	    				$("#iciciProfile #totalPremium").html(response.policyData.total_premium_amt);
+	    				$("#iciciProfile renew-button").html('data-renewal', renewalString);
+
+						$("#noniciciProfile").hide();
+	    				$("#iciciProfile").show();
                     	
 						//Code to implement policy renew functionality
 						$(".renew-button").off("click").on("click", function(){
@@ -202,18 +192,6 @@ function submitForm(dataObject, formData, formID) {
             }
             else if (formID == "mapForm") {
                 map.clear();
-                /*var points = [
-					new plugin.google.maps.LatLng(19.33, 72.75),
-					new plugin.google.maps.LatLng(19.33, 73.08),
-					new plugin.google.maps.LatLng(18.88, 72.75),
-					new plugin.google.maps.LatLng(18.88, 73.08)
-				];
-				var latLngBounds = new plugin.google.maps.LatLngBounds(points);
-
-				map.animateCamera({
-					'target' : latLngBounds,
-					'duration' : 1000
-				});*/
                 $.each(response, function(branchName, branchData) {
                     var snippet;
                     if (branchData.ifsc)
@@ -229,23 +207,19 @@ function submitForm(dataObject, formData, formID) {
             }
             else if (formID == "policyRenewal") {
             	if (response[0].code == 200) {
-					var summaryString = "<h6><b>Policy Details:</b></h6>";
-					summaryString += "<p><b>Existing Policy No.</b>: " + response[1].policy_no + "</p>";
-					summaryString += "<p><b>New Policy No.</b>: " + response[1].new_policy_no + "</p>";
-					summaryString += "<p><b>Duration</b>: " + response[1].policy_st_date + " to " + response[1].policy_end_date + "</p>";
-					summaryString += "<p><b>Insured Declared Value (IDV):</b>" + response[1].idv + "</p>";
-					summaryString += "<p><b>Total Premium:</b>" + response[1].basic_premium + "(Basic) + " + response[1].serv_tax + "(Service Tax) = " + response[1].tot_premium_amt + "</p>";
-					summaryString += "<h6><b>Customer Details:</b></h6>";
-					summaryString += "<p><b>Customer Name:</b>" + response[1].cust_name + "</p>";
-					summaryString += "<p><b>Email ID:</b>" + response[1].email_id + "</p>";
-					summaryString += "<p><b>Mobile No.:</b>" + response[1].mobile_no + "</p>";
-					summaryString += "<h6><b>Vehicle Details:</b></h6>";
-					summaryString += "<p><b>Type:</b>" + response[1].vehicle_tp + "</p>";
-					summaryString += "<p><b>Model:</b>" + response[1].manufacturer + " " + response[1].model + "</p>";
-					summaryString += "<p><b>Engine No.:</b>" + response[1].engine_no + "</p>";
-					summaryString += "<p><b>Chasis No.:</b>" + response[1].chasis_no + "</p>";
-					summaryString += "<p><b>RTO:</b>" + response[1].rto + "</p>";
-					$("#renewalDialog div[role='main']").html(summaryString);
+					$("#renewalDialog #policyNoOld").html(response[1].policy_no);
+					$("#renewalDialog #policyNoNew").html(response[1].new_policy_no);
+					$("#renewalDialog #duration").html(response[1].policy_st_date + " to " + response[1].policy_end_date);
+					$("#renewalDialog #idv").html(response[1].idv);
+					$("#renewalDialog #totalPremium").html(response[1].basic_premium + "(Basic) + " + response[1].serv_tax + "(Service Tax) = " + response[1].tot_premium_amt);
+					$("#renewalDialog #custName").html(response[1].cust_name);
+					$("#renewalDialog #emailID").html(response[1].email_id);
+					$("#renewalDialog #mobileNo").html(response[1].mobile_no);
+					$("#renewalDialog #type").html(response[1].vehicle_tp);
+					$("#renewalDialog #model").html(response[1].manufacturer + " " + response[1].model);
+					$("#renewalDialog #engineNo").html(response[1].engine_no);
+					$("#renewalDialog #chasisNo").html(response[1].chasis_no);
+					$("#renewalDialog #rto").html(response[1].rto);
 					
 					$("#renewalDialog").popup("open");
 					return false;
@@ -254,29 +228,39 @@ function submitForm(dataObject, formData, formID) {
             else if(formID == 'carQuoteForm'){
                 alert("api for car quote")
                 if(response[0].code==200){
-                    alert(response[1].eamil_id+"<<my email");
-                     var premium = 100;
-                var tpPremium = 20;
+                    alert(response[1].email_id+"<<my email");
+                var premium = parseInt(response[1].premium);
+                var tpPremium = 1000;
                 var totalPremium=0;
                 var NCBVal = 0;
                 var NCB = $('input[name="carQuoteNoclaim"]:checked').val();
                 if(NCB == 'YES'){
-                   // alert("yes")
-                    NCBVal = 5;
+                    //alert("yes")
+                    NCBVal = 500;
                     totalPremium = (premium + tpPremium)- NCBVal;
+                    alert(totalPremium+" if yes")
                  //   alert(totalPremium)
                 }else{
-                 //   alert("no")
+                    //alert("no")
                     NCBVal = 0;
                     totalPremium = (premium + tpPremium)- NCBVal;
+                    alert(totalPremium+" if no")
                  //   alert(totalPremium);
                 }
                 
                 $( "#carQuoteDialog" ).on( "popupbeforeposition", function( event, ui ) {
-                    console.log(totalPremium+"><><><>")
-                   $( "p:first" ).text(parseInt(totalPremium)+" Rs"); 
-                } );
+                        //alert(totalPremium+"><><><>")
+                       $( "#bhenchod" ).text(totalPremium); 
+                       $("#quoteNCBValue").val(parseInt(totalPremium)); 
+                       $("#quoteTPValue").val(tpPremium)
+                       $("#quoteIDVValue").val(response[1].idv);
+                    });
             $("#carQuoteDialog").popup("open");
+            $( "#carQuoteDialog" ).on( "popupafterclose", function( event, ui ) {
+                    redirecturl = "#eapp"
+                    $.mobile.navigate(redirecturl); 
+                } );
+            return false;
                 }
             }
 
@@ -425,22 +409,8 @@ $(document).on('pageinit', function() {
 		$("#mapForm").submit();
     });
 
-    //var map = plugin.google.maps.Map.getMap();
     map.on(plugin.google.maps.event.MAP_READY, function(map) {
-		/*var points = [
-			new plugin.google.maps.LatLng(19.33, 72.75),
-			new plugin.google.maps.LatLng(19.33, 73.08),
-			new plugin.google.maps.LatLng(18.88, 72.75),
-			new plugin.google.maps.LatLng(18.88, 73.08)
-		];
-		var latLngBounds = new plugin.google.maps.LatLngBounds(points);
-
-		map.animateCamera({
-			'target' : latLngBounds,
-			'duration' : 1000
-		});*/
-
-        var div = document.getElementById('map_canvas');
+		var div = document.getElementById('map_canvas');
         map.setDiv(div);
     });
     /*-----------Miscellaneous Events end-----------*/

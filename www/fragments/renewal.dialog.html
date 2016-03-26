@@ -1,9 +1,65 @@
 <div data-role="popup" id="renewalDialog" style="min-height:90%;" data-history= "false">
 	<div data-role="header" data-theme="b" role="banner" class="ui-header ui-bar-b">
-		<a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-left" data-rel="back">Close</a>
-		<h1 class="quote-title" role="heading" aria-level="1">Policy Renewal Details</h1>
+		<h1 role="heading" aria-level="1">Policy Renewal Details</h1>
 	</div>
 
     <div role="main" class="ui-content">
+    	<div class="ui-grid-a">
+    		<div class="ui-block-a"><b>Policy Details:</b></div>
+    		<div class="ui-block-b"></div>
+
+    		<div class="ui-block-a">Existing Policy No.</div>
+    		<div class="ui-block-b" id="policyNoOld"></div>
+
+    		<div class="ui-block-a">New Policy No.</div>
+    		<div class="ui-block-b" id="policyNoNew"></div>
+
+    		<div class="ui-block-a">Duration:</div>
+    		<div class="ui-block-b" id="duration"></div>
+
+    		<div class="ui-block-a">Insured Declared Value (IDV):</div>
+    		<div class="ui-block-b" id="idv"></div>
+
+    		<div class="ui-block-a">Total Premium:</div>
+    		<div class="ui-block-b" id="totalPremium"></div>
+    		
+    		<div class="ui-block-a"><b>Customer Details:</b></div>
+    		<div class="ui-block-b"></div>
+
+    		<div class="ui-block-a">Customer Name:</div>
+    		<div class="ui-block-b" id="custName"></div>
+
+    		<div class="ui-block-a">Email ID:</div>
+    		<div class="ui-block-b" id="emailID"></div>
+
+    		<div class="ui-block-a">Mobile No.:</div>
+    		<div class="ui-block-b" id="mobileNo"></div>
+    		
+    		<div class="ui-block-a"><b>Vehicle Details:</b></div>
+    		<div class="ui-block-b"></div>
+
+    		<div class="ui-block-a">Type:</div>
+    		<div class="ui-block-b" id="type"></div>
+    		
+    		<div class="ui-block-a">Model:</div>
+    		<div class="ui-block-b" id="model"></div>
+    		
+    		<div class="ui-block-a">Engine No.:</div>
+    		<div class="ui-block-b" id="engineNo"></div>
+    		
+    		<div class="ui-block-a">Chasis No.:</div>
+    		<div class="ui-block-b" id="chasisNo"></div>
+    		
+    		<div class="ui-block-a">RTO:</div>
+    		<div class="ui-block-b" id="rto"></div>
+    	</div>
+
+    	<div class="ui-grid-b">
+    		<div class="ui-block-a"></div>
+    		<div class="ui-block-b">
+    			<a href="" class="ui-btn-primary ui-btn-raised clr-primary waves-effect waves-button" data-role="button" data-rel="back" role="button"><i class="zmdi zmdi-check"></i> OK</a>
+			</div>
+			<div class="ui-block-c"></div>
+		</div>
     </div>
 </div>

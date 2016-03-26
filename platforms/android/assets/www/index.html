@@ -66,18 +66,70 @@
 			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
 				
 				<div data-role="nd2tab" data-tab="account">
-					<div id="account_details">
+					<div class="ui-grid-a" id="noniciciProfile">
+						<div class="ui-block-a">Name:</div>
+						<div class="ui-block-b" id="name"></div>
+
+						<div class="ui-block-a">Mobile No.:</div>
+						<div class="ui-block-b" id="mobileNo"></div>
+
+						<div class="ui-block-a">Email ID:</div>
+						<div class="ui-block-b" id="emailID"></div>
+
+						<div class="ui-block-a">Aadhar No.:</div>
+						<div class="ui-block-b" id="aadharNo"></div>
+
+						<div class="ui-block-a">Gender:</div>
+						<div class="ui-block-b" id="gender"></div>	
+					</div>
+
+					<div id="iciciProfile">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">Customer ID:</div>
+							<div class="ui-block-b" id="custID"></div>
+
+							<div class="ui-block-a">Account No.:</div>
+							<div class="ui-block-b" id="accountNo"></div>
+
+							<div class="ui-block-a">Account Type:</div>
+							<div class="ui-block-b" id="accountType"></div>
+
+							<div class="ui-block-a">Balance:</div>
+							<div class="ui-block-b" id="balance"></div>
+							
+							<div class="ui-block-a">Mobile No.:</div>
+							<div class="ui-block-b" id="mobileNo"></div>
+						</div>
+						
+						<div class="ui-grid-a">
+							<div class="ui-block-solo"><h3><b>Policies:</b></h3></div>
+							
+							<div class="ui-block-a">Product:</div>
+							<div class="ui-block-b" id="product"></div>
+							
+							<div class="ui-block-a">Policy End Date:</div>
+							<div class="ui-block-b" id="endDate"></div>
+							
+							<div class="ui-block-a">Total Premium:</div>
+							<div class="ui-block-b" id="totalPremium"></div>
+						</div>	
+
+						<div class="ui-grid-a">
+							<div class="ui-block-solo">
+								<button class='ui-btn-primary ui-btn-raised clr-primary waves-effect waves-button renew-button' data-renewal='' data-module='login' data-action='policyRenewal'>Renew</button>
+							</div>
+						</div>
 					</div>
 				</div>
 
 				<div data-role="nd2tab" data-tab="car">
-					<form id="carQuoteForm" name="carQuoteForm" data-ajax="false" data-module="car" data-action="getCarQuote" data-transition="pop">
+					<form id="carQuoteForm" name="carQuoteForm" data-ajax="false" data-module="login" data-action="getQuickQuote" data-transition="pop">
 						<nd2-include data-src="fragments/car.html"></nd2-include>
 			        </form>
 				</div>
 
 				<div data-role="nd2tab" data-tab="bike">
-					<form id="bikeQuoteForm" name="bikeQuoteForm" data-ajax="false" data-module="bike" data-action="getBikeQuote" data-transition="pop">
+					<form id="bikeQuoteForm" name="bikeQuoteForm" data-ajax="false" data-module="login" data-action="getQuickQuote" data-transition="pop">
 						<nd2-include data-src="fragments/bike.html"></nd2-include>
 					</form>
 				</div>
@@ -87,6 +139,9 @@
 
 
 		<div data-role="page" id="map">
+			<div data-role="panel" id="bottomsheetMap" data-animate="false" data-position='bottom' data-display="overlay">
+				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
+			</div>
 
 			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
 				<a href="#bottomsheetMap" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
@@ -110,10 +165,7 @@
 								</div>
 							</div>
 						</div>
-					</form>		
-					<div data-role="panel" id="bottomsheetMap" data-animate="false" data-position='bottom' data-display="overlay">
-						<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
-					</div>			
+					</form>					
 				</div>
 			</div>
 		</div>

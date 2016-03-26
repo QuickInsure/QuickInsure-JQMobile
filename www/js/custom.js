@@ -147,12 +147,13 @@ function submitForm(dataObject, formData, formID) {
             var response = JSON.parse(successResponse.responseText);
             if (formID == "loginForm") {
                 if (response.status == "valid") {
-    				var summaryString = "<p>Name: " + response.data.name + "</p>";
-    				summaryString += "<p>Mobile No.: " + response.data.mobile + "</p>";
-    				summaryString += "<p>Email ID: " + response.data.email + "</p>";
-    				summaryString += "<p>Aadhar No.: " + response.data.aadhar + "</p>";
-    				summaryString += "<p>Gender: " + response.data.gender + "</p>";
-    				$("#account_details").append(summaryString);
+    				$("#noniciciProfile #name").html(response.data.name);
+    				$("#noniciciProfile #mobileNo").html(response.data.mobile);
+    				$("#noniciciProfile #emailID").html(response.data.email);
+    				$("#noniciciProfile #aadharNo").html(response.data.aadhar);
+    				$("#noniciciProfile #gender").html(response.data.gender);
+					$("#noniciciProfile").show();
+    				$("#iciciProfile").hide();
 
                     $.mobile.navigate(redirecturl);
                 }
@@ -161,19 +162,20 @@ function submitForm(dataObject, formData, formID) {
                 }
                 else {
                     if (response.code == 200) {
-                        var summaryString = "<p>Customer ID: " + response.userData.custid + "</p>";
-                        summaryString += "<p>Account No.: " + response.userData.accountno + "</p>";
-                        summaryString += "<p>Account Type: " + response.userData.accounttype + "</p>";
-                        summaryString += "<p>Balance: " + response.userData.balance + "</p>";
-                        summaryString += "<p>Mobile No.: " + response.userData.mobileno + "</p>";
-
-                        summaryString += "<h3>Policy Details</h3>";
-                        summaryString += "<p>Product: " + response.policyData.product + "</p>";
-                        summaryString += "<p>Policy End Date: " + response.policyData.policy_end_date + "</p>";
-                        summaryString += "<p>Total Premium: " + response.policyData.total_premium_amt + "</p>";
                         renewalString = "Policy Renewal:\nInsured:"+response.policyData.insured_name+"\nProduct:"+response.policyData.product+"\nMobile:"+response.policyData.mobile_no+"\nEmail:"+response.policyData.email_id+"\nExpiry:"+response.policyData.policy_end_date+"\nDOB:"+response.policyData.dob+"\nAddress:"+response.policyData.resident_add+","+response.policyData.state+","+response.policyData.pincode+"\nRenew For:1 year";
-                        summaryString += "<button class='ui-btn ui-btn-inline renew-button' data-renewal='"+renewalString+"' data-module='login' data-action='policyRenewal'>Renew</button>";
-                        $("#account_details").html(summaryString);
+
+	    				$("#iciciProfile #custID").html(response.userData.custid);
+	    				$("#iciciProfile #accountNo").html(response.userData.accountno);
+	    				$("#iciciProfile #accountType").html(response.userData.accounttype);
+	    				$("#iciciProfile #balance").html(response.userData.balance);
+	    				$("#iciciProfile #mobileNo").html(response.userData.mobileno);
+	    				$("#iciciProfile #product").html(response.policyData.product);
+	    				$("#iciciProfile #endDate").html(response.policyData.policy_end_date);
+	    				$("#iciciProfile #totalPremium").html(response.policyData.total_premium_amt);
+	    				$("#iciciProfile renew-button").html('data-renewal', renewalString);
+
+						$("#noniciciProfile").hide();
+	    				$("#iciciProfile").show();
                     	
 						//Code to implement policy renew functionality
 						$(".renew-button").off("click").on("click", function(){
@@ -205,23 +207,19 @@ function submitForm(dataObject, formData, formID) {
             }
             else if (formID == "policyRenewal") {
             	if (response[0].code == 200) {
-					var summaryString = "<h6><b>Policy Details:</b></h6>";
-					summaryString += "<p><b>Existing Policy No.</b>: " + response[1].policy_no + "</p>";
-					summaryString += "<p><b>New Policy No.</b>: " + response[1].new_policy_no + "</p>";
-					summaryString += "<p><b>Duration</b>: " + response[1].policy_st_date + " to " + response[1].policy_end_date + "</p>";
-					summaryString += "<p><b>Insured Declared Value (IDV):</b>" + response[1].idv + "</p>";
-					summaryString += "<p><b>Total Premium:</b>" + response[1].basic_premium + "(Basic) + " + response[1].serv_tax + "(Service Tax) = " + response[1].tot_premium_amt + "</p>";
-					summaryString += "<h6><b>Customer Details:</b></h6>";
-					summaryString += "<p><b>Customer Name:</b>" + response[1].cust_name + "</p>";
-					summaryString += "<p><b>Email ID:</b>" + response[1].email_id + "</p>";
-					summaryString += "<p><b>Mobile No.:</b>" + response[1].mobile_no + "</p>";
-					summaryString += "<h6><b>Vehicle Details:</b></h6>";
-					summaryString += "<p><b>Type:</b>" + response[1].vehicle_tp + "</p>";
-					summaryString += "<p><b>Model:</b>" + response[1].manufacturer + " " + response[1].model + "</p>";
-					summaryString += "<p><b>Engine No.:</b>" + response[1].engine_no + "</p>";
-					summaryString += "<p><b>Chasis No.:</b>" + response[1].chasis_no + "</p>";
-					summaryString += "<p><b>RTO:</b>" + response[1].rto + "</p>";
-					$("#renewalDialog div[role='main']").html(summaryString);
+					$("#renewalDialog #policyNoOld").html(response[1].policy_no);
+					$("#renewalDialog #policyNoNew").html(response[1].new_policy_no);
+					$("#renewalDialog #duration").html(response[1].policy_st_date + " to " + response[1].policy_end_date);
+					$("#renewalDialog #idv").html(response[1].idv);
+					$("#renewalDialog #totalPremium").html(response[1].basic_premium + "(Basic) + " + response[1].serv_tax + "(Service Tax) = " + response[1].tot_premium_amt);
+					$("#renewalDialog #custName").html(response[1].cust_name);
+					$("#renewalDialog #emailID").html(response[1].email_id);
+					$("#renewalDialog #mobileNo").html(response[1].mobile_no);
+					$("#renewalDialog #type").html(response[1].vehicle_tp);
+					$("#renewalDialog #model").html(response[1].manufacturer + " " + response[1].model);
+					$("#renewalDialog #engineNo").html(response[1].engine_no);
+					$("#renewalDialog #chasisNo").html(response[1].chasis_no);
+					$("#renewalDialog #rto").html(response[1].rto);
 					
 					$("#renewalDialog").popup("open");
 					return false;
@@ -412,20 +410,7 @@ $(document).on('pageinit', function() {
     });
 
     map.on(plugin.google.maps.event.MAP_READY, function(map) {
-		/*var points = [
-			new plugin.google.maps.LatLng(19.33, 72.75),
-			new plugin.google.maps.LatLng(19.33, 73.08),
-			new plugin.google.maps.LatLng(18.88, 72.75),
-			new plugin.google.maps.LatLng(18.88, 73.08)
-		];
-		var latLngBounds = new plugin.google.maps.LatLngBounds(points);
-
-		map.animateCamera({
-			'target' : latLngBounds,
-			'duration' : 1000
-		});*/
-
-        var div = document.getElementById('map_canvas');
+		var div = document.getElementById('map_canvas');
         map.setDiv(div);
     });
     /*-----------Miscellaneous Events end-----------*/

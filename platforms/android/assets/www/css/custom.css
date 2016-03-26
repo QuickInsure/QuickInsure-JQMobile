@@ -9,3 +9,8 @@
 .bottomsheet {
 	z-index: 999;
 }
+
+.ui-input-btn {
+	background-color: #ff5722 !important;
+    color: white !important;
+}
