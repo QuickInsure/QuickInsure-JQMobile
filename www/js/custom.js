@@ -91,6 +91,7 @@ function showMessage(message, callback, title, buttonName) {
 
 function renewPolicy(clickObject) {
 	if (checkConnection()) {
+		submitForm(clickObject.data(), "", "policyRenewal");
 	}
 	else {
 		window.plugins.socialsharing.shareViaSMS('Policy Renewal:\n'+clickObject.data('renewal'), '0612345678', null);
@@ -127,6 +128,7 @@ function submitForm(dataObject, formData, formID) {
 
     request.send(
         function(successResponse){
+        	alert(successResponse.responseText);
             var response = JSON.parse(successResponse.responseText);
             if (formID == "loginForm") {
                 if (response.status == "valid") {
@@ -155,7 +157,7 @@ function submitForm(dataObject, formData, formID) {
                         summaryString += "<p>Policy End Date: " + response.policyData.policy_end_date + "</p>";
                         summaryString += "<p>Total Premium: " + response.policyData.total_premium_amt + "</p>";
                         renewalString = "Policy Renewal:\nInsured:"+response.policyData.insured_name+"\nProduct:"+response.policyData.product+"\nMobile:"+response.policyData.mobile_no+"\nEmail:"+response.policyData.email_id+"\nExpiry:"+response.policyData.policy_end_date+"\nDOB:"+response.policyData.dob+"\nAddress:"+response.policyData.resident_add+","+response.policyData.state+","+response.policyData.pincode+"\nRenew For:1 year";
-                        summaryString += "<button class='ui-btn ui-btn-inline renew-button' data-renewal='"+renewalString+"'>Renew</button>";
+                        summaryString += "<button class='ui-btn ui-btn-inline renew-button' data-renewal='"+renewalString+"' data-module='login' data-action='policyRenewal'>Renew</button>";
                         $("#account_details").append(summaryString);
                     	
 						//Code to implement policy renew functionality
@@ -185,6 +187,9 @@ function submitForm(dataObject, formData, formID) {
                         'snippet': snippet
 					});
                 });
+            }
+            else if (formID == "policyRenewal") {
+                alert(JSON.stringify(response));return false;
             }
             else if(formID == 'carQuoteForm'){
                 alert("api for car quote")

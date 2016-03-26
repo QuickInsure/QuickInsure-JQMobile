@@ -31,10 +31,6 @@ app.initialize();
 
 
 //Global variables
-//development
-//var serverURL = 'http://localhost/eWarranty/mobileAPI.php';
-//production
-//var serverURL = 'http://phpapi.net78.net/eWarranty/mobileAPI.php';
 var networkErrorMessage = 'Network error! Please try again.';
 
 
@@ -95,51 +91,11 @@ function showMessage(message, callback, title, buttonName) {
 
 function renewPolicy(clickObject) {
 	if (checkConnection()) {
+		submitForm(clickObject.data(), "", "policyRenewal");
 	}
 	else {
-		//if (device.platform == "Android") {
-		    window.plugins.socialsharing.shareViaSMS('Policy Renewal:\n'+clickObject.data('renewal'), '0612345678', null);
-		/*}
-		else if (device.platform == "iOS") {
-		    window.plugins.socialsharing.setIPadPopupCoordinates(clickObject.offset().left + ',' + clickObject.offset().top + ',' + clickObject.width() + ',' + clickObject.height());
-		    window.plugins.socialsharing.share(null, null, null, 'https://itunes.apple.com/in/app/hopeless-2-cave-escape/id1048438762?mt=8');
-		}
-		else if (device.platform == "WinCE" || device.platform == "Win32NT") {
-		    window.plugins.socialsharing.share(null, null, null, 'http://www.windowsphone.com/<language>-<country>/store/app/<app-name>/<app-id>');   
-		}*/		
+		window.plugins.socialsharing.shareViaSMS('Policy Renewal:\n'+clickObject.data('renewal'), '0612345678', null);
 	}
-}
-
-//Function to get data from online server if connected
-function getData(pageID, module, action, dataID) {
-    if (checkConnection()) {
-        $.ajax({
-            url: serverURL,
-            data: {
-                module: module,
-                action: action,
-                dataID: dataID,
-                formData: "loginEmail="+window.localStorage.getItem("loginEmail")+"&loginType="+window.localStorage.getItem("loginType")+"&loginMemberid="+window.localStorage.getItem("loginMemberid")
-            },
-            dataType: 'json',
-            type: 'POST',                   
-            async: true,
-            beforeSend: function() {
-                $.mobile.loading("show");
-            },
-            complete: function() {
-                $.mobile.loading("hide");
-            },
-            success: function (result) {
-                if(result.status) {
-                    $.mobile.navigate(pageID);
-                }
-            },
-            error: function (request,error) {
-                showMessage(networkErrorMessage, null, null, null);
-            }
-        });
-    }
 }
 
 
@@ -154,8 +110,6 @@ function submitForm(dataObject, formData, formID) {
         values[field.name] = field.value;
         console.log(field.name+"<-->"+field.value)
     });
-     console.log("Module-->"+module+"<--action-->"+action+"<--redirectURL-->"+redirecturl);
-     console.log(formData+"formData");
     
 	if (formID =="carQuoteForm" ){
 		$("#carQuoteDialog").popup("open");
@@ -174,6 +128,7 @@ function submitForm(dataObject, formData, formID) {
 
     request.send(
         function(successResponse){
+        	alert(successResponse.responseText);
             var response = JSON.parse(successResponse.responseText);
             if (formID == "loginForm") {
                 if (response.status == "valid") {
@@ -202,7 +157,7 @@ function submitForm(dataObject, formData, formID) {
                         summaryString += "<p>Policy End Date: " + response.policyData.policy_end_date + "</p>";
                         summaryString += "<p>Total Premium: " + response.policyData.total_premium_amt + "</p>";
                         renewalString = "Policy Renewal:\nInsured:"+response.policyData.insured_name+"\nProduct:"+response.policyData.product+"\nMobile:"+response.policyData.mobile_no+"\nEmail:"+response.policyData.email_id+"\nExpiry:"+response.policyData.policy_end_date+"\nDOB:"+response.policyData.dob+"\nAddress:"+response.policyData.resident_add+","+response.policyData.state+","+response.policyData.pincode+"\nRenew For:1 year";
-                        summaryString += "<button class='ui-btn ui-btn-inline renew-button' data-renewal='"+renewalString+"'>Renew</button>";
+                        summaryString += "<button class='ui-btn ui-btn-inline renew-button' data-renewal='"+renewalString+"' data-module='login' data-action='policyRenewal'>Renew</button>";
                         $("#account_details").append(summaryString);
                     	
 						//Code to implement policy renew functionality
@@ -232,6 +187,37 @@ function submitForm(dataObject, formData, formID) {
                         'snippet': snippet
 					});
                 });
+            }
+            else if (formID == "policyRenewal") {
+                alert(JSON.stringify(response));return false;
+            }
+            else if(formID == 'carQuoteForm'){
+                alert("api for car quote")
+                if(response[0].code==200){
+                    alert(response[1].eamil_id+"<<my email");
+                     var premium = 100;
+                var tpPremium = 20;
+                var totalPremium=0;
+                var NCBVal = 0;
+                var NCB = $('input[name="carQuoteNoclaim"]:checked').val();
+                if(NCB == 'YES'){
+                   // alert("yes")
+                    NCBVal = 5;
+                    totalPremium = (premium + tpPremium)- NCBVal;
+                 //   alert(totalPremium)
+                }else{
+                 //   alert("no")
+                    NCBVal = 0;
+                    totalPremium = (premium + tpPremium)- NCBVal;
+                 //   alert(totalPremium);
+                }
+                
+                $( "#carQuoteDialog" ).on( "popupbeforeposition", function( event, ui ) {
+                    console.log(totalPremium+"><><><>")
+                   $( "p:first" ).text(parseInt(totalPremium)+" Rs"); 
+                } );
+            $("#carQuoteDialog").popup("open");
+                }
             }
 
         }, 
@@ -270,157 +256,27 @@ $(window).on('hashchange', function() {
     var currentHash = jQuery.mobile.path.parseLocation().hash;
 
     if (currentHash == "#map") {
-        //getData("#viewProfile", "user", "profile");
         $("#mapForm").submit();
     }
 });
 
-
-//Initialize image size in popup
-$(document).on("pagecreate", function() {
-    $(".photopopup").on({
-        popupbeforeposition: function() {
-            var maxHeight = $(window).height() - 60 + "px";
-            $(".photopopup img").css("max-height", maxHeight);
-        }
-    });
-});
-
-/*-----------Camera callback functions start-----------*/
-function onBillScanSuccess(imageData) {
-    $("#billCopyPopup img").attr("src", "data:image/jpeg;base64," + imageData);
-    $("#billCopyPopup").popup("open");
-}
-function onAMCScanSuccess(imageData) {
-    $("#amcCopyPopup img").attr("src", "data:image/jpeg;base64," + imageData);
-    $("#amcCopyPopup").popup("open");
-}
-function onUploadBillScanSuccess(imageData) {
-    $("#uploadBillPopup img").attr("src", "data:image/jpeg;base64," + imageData);
-    $("#uploadBillPopup").popup("open");
-}
-function onUploadAMCScanSuccess(imageData) {
-    $("#uploadBillAMCCopyPopup img").attr("src", "data:image/jpeg;base64," + imageData);
-    $("#uploadBillAMCCopyPopup").popup("open");
-}
-function onFail(message) {
-    showMessage('Failed because: ' + message, null, null, null);
-}
-/*-----------Camera callback functions end-----------*/
 function getEapp(){
-//alert("going to eapp")
-redirecturl = "#eapp"
-console.log("fffff"+redirecturl)
-//location.href="www/fragments/eapp.html"
-$.mobile.navigate(redirecturl); 
-//event.preventDefault;
-return false;
+	//alert("going to eapp")
+	redirecturl = "#eapp"
+	console.log("fffff"+redirecturl)
+	//location.href="www/fragments/eapp.html"
+	$.mobile.navigate(redirecturl); 
+	//event.preventDefault;
+	return false;
 }
 
 //Equivalent to JQuery $(document).ready()
 $(document).on('pageinit', function() {
     FastClick.attach(document.body);
 
-    /*-----------Code to trigger upload & validation of images from gallery start-----------*/
-    //Button click triggers click of associated file input
-    $(".galleryButton").off("click").on("click", function(){
-        if (device.platform == "Android") {
-            $("#"+$(this).data("target")).trigger("click");
-        }
-        else if (device.platform == "iOS") {
-            if($(this).data("target") == "billCopyTemp") {
-                navigator.camera.getPicture(onBillScanSuccess, onFail, { 
-                    quality: 50,
-                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                    destinationType: Camera.DestinationType.DATA_URL
-                });
-            }
-            else if($(this).data("target") == "amcCopyTemp") {
-                navigator.camera.getPicture(onAMCScanSuccess, onFail, { 
-                    quality: 50,
-                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                    destinationType: Camera.DestinationType.DATA_URL
-                });
-            }
-            else if($(this).data("target") == "uploadBillCopyTemp") {
-                navigator.camera.getPicture(onUploadBillScanSuccess, onFail, { 
-                    quality: 50,
-                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                    destinationType: Camera.DestinationType.DATA_URL
-                });
-            }
-            else if($(this).data("target") == "uploadBillAMCCopyTemp") {
-                navigator.camera.getPicture(onUploadAMCScanSuccess, onFail, { 
-                    quality: 50,
-                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                    destinationType: Camera.DestinationType.DATA_URL
-                });
-            }
-        }
+    $(".car-list").on("click", function(){
+        console.log("fsdjfhsdjfs");
     });
-
-
-    $("#scanBill").off("click").on("click", function(){
-        navigator.camera.getPicture(onBillScanSuccess, onFail, { quality: 50,
-            destinationType: Camera.DestinationType.DATA_URL
-        });
-    });
-    $("#scanAMC").off("click").on("click", function(){
-        navigator.camera.getPicture(onAMCScanSuccess, onFail, { quality: 50,
-            destinationType: Camera.DestinationType.DATA_URL
-        });
-    });
-    $("#scanUploadBill").off("click").on("click", function(){
-        navigator.camera.getPicture(onUploadBillScanSuccess, onFail, { quality: 50,
-            destinationType: Camera.DestinationType.DATA_URL
-        });
-    });
-    $("#scanUploadAMC").off("click").on("click", function(){
-        navigator.camera.getPicture(onUploadAMCScanSuccess, onFail, { quality: 50,
-            destinationType: Camera.DestinationType.DATA_URL
-        });
-    });
-
-
-    //Successful file input validates the file & displays in popup
-    $("input[type='file']").off("change").on("change", function(){
-        var popupID = $(this).data("target");
-        var imageFile = this.files[0];
-        var reader = new FileReader();
-
-        reader.onloadend = function () {
-            $("#"+popupID+" img").attr("src", reader.result);
-            $("#"+popupID).popup("open");
-        }
-        
-        if(imageFile && imageFile.type.indexOf("image/") == 0 && parseInt(imageFile.size) <= 2097152) {
-            reader.readAsDataURL(imageFile);
-        }
-        else {
-            showMessage("Please select an image with size less than 2MB.", null, null, null);
-        }
-    });
-
-        $(".car-list").on("click", function(){
-            console.log("fsdjfhsdjfs");
-        });    
-
-
-
-
-    //Cancel image clears the file input and closes the popup
-    $(".confirmImage").click(function(){
-        $(this).parent().popup("close");
-        var image = $(this).siblings("img");
-        $("#"+image.data("target")).val(image.prop("src"));
-    });
-
-    $(".cancelImage").click(function(){
-        $(this).parent().popup("close");
-        var image = $(this).siblings("img");
-        $("#"+image.data("target")).val("");
-    });
-    /*-----------Code to trigger upload & validation of images from gallery end-----------*/
 
 
     /*-----------Code to validate each form and submit to online server if connected start-----------*/
@@ -498,14 +354,6 @@ $(document).on('pageinit', function() {
     });
 
 
-    //Code to destroy login info upon logout buttons
-    $(".logout").click(function(){
-    	window.localStorage.clear();
-        window.localStorage.setItem("tutorialFl", "true");
-   		$.mobile.navigate("#preLogin"); 	
-    });
-
-
 	$("li[data-tab='account']").click();
     $("li[data-tab='login']").click();
 
@@ -515,23 +363,5 @@ $(document).on('pageinit', function() {
     $("input[name='locate']").off("change").on("change", function(){
 		$("#mapForm").submit();
     });
-
-  //   var map = plugin.google.maps.Map.getMap();
-  //   map.on(plugin.google.maps.event.MAP_READY, function(map) {
-		// var points = [
-		// 	new plugin.google.maps.LatLng(19.33, 72.75),
-		// 	new plugin.google.maps.LatLng(19.33, 73.08),
-		// 	new plugin.google.maps.LatLng(18.88, 72.75),
-		// 	new plugin.google.maps.LatLng(18.88, 73.08)
-		// ];
-		// var latLngBounds = new plugin.google.maps.LatLngBounds(points);
-
-		// map.animateCamera({
-		// 	'target' : latLngBounds
-		// });
-
-  //       var div = document.getElementById('map_canvas');
-  //       map.setDiv(div);
-  //   });
     /*-----------Miscellaneous Events end-----------*/
 });

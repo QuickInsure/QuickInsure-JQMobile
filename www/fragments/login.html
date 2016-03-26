@@ -2,10 +2,10 @@
     <div class="col-xs-12 col-sm-6 col-md-4">
     	<div class="box">
     		<label for="login_field1">Customer ID:</label>
-    		<input type="text" name="custid" id="login_field1" value="" data-clear-btn="true" placeholder="Customer ID" autocomplete="off">
+    		<input type="tel" name="custid" id="login_field1" value="" data-clear-btn="true" placeholder="Customer ID" autocomplete="off">
 
     		<label for="login_field2">Account No.:</label>
-    		<input type="text" name="accountno" id="login_field2" value="" data-clear-btn="true" placeholder="Account No." autocomplete="off">
+    		<input type="tel" name="accountno" id="login_field2" value="" data-clear-btn="true" placeholder="Account No." autocomplete="off">
     	</div>
 
 		<div class="box">
@@ -36,13 +36,14 @@ $(document).ready(function(){
         if ($(this).val() == "icici") {
             $("#login_field1").attr("name", "custid");
             $("#login_field1").attr("placeholder", "Customer ID");
+            $("#login_field1").attr("type", "tel");
             $("#login_field1").removeClass("required");
             $("#login_field1").val("");
             $("label[for='login_field1']").html("Customer ID:");
 
             $("#login_field2").attr("name", "accountno");
             $("#login_field2").attr("placeholder", "Account No.");
-            $("#login_field2").attr("type", "text");
+            $("#login_field2").attr("type", "tel");
             $("#login_field2").removeClass("required");
             $("#login_field2").val("");
             $("label[for='login_field2']").html("Account No.:");
@@ -50,6 +51,7 @@ $(document).ready(function(){
         else if ($(this).val() == "mobile") {
             $("#login_field1").attr("name", "mobile");
             $("#login_field1").attr("placeholder", "Mobile ID");
+            $("#login_field1").attr("type", "tel");
             $("#login_field1").addClass("required");
             $("#login_field1").val("");
             $("label[for='login_field1']").html("Mobile No.:");
@@ -63,7 +65,8 @@ $(document).ready(function(){
         }
         else if ($(this).val() == "aadhar") {
             $("#login_field1").attr("name", "aadhar");
-            $("#login_field1").attr("placeholder", "AADHAR ID");
+            $("#login_field1").attr("placeholder", "AADHAR No.");
+            $("#login_field1").attr("type", "tel");
             $("#login_field1").addClass("required");
             $("#login_field1").val("");
             $("label[for='login_field1']").html("AADHAR No.:");
@@ -78,6 +81,7 @@ $(document).ready(function(){
         else if ($(this).val() == "email") {
             $("#login_field1").attr("name", "email");
             $("#login_field1").attr("placeholder", "Email ID");
+            $("#login_field1").attr("type", "email");
             $("#login_field1").addClass("required");
             $("#login_field1").val("");
             $("label[for='login_field1']").html("Email ID:");
