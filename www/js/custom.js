@@ -127,10 +127,10 @@ function submitForm(dataObject, formData, formID) {
         console.log(field.name+"<-->"+field.value)
     });
     
-	if (formID =="carQuoteForm" ){
-		$("#carQuoteDialog").popup("open");
-		return false;
-	}
+	// if (formID =="carQuoteForm" ){
+	// 	$("#carQuoteDialog").popup("open");
+	// 	return false;
+	// }
 	else if (formID =="bikeQuoteForm" ){
 		$("#carQuoteDialog").popup("open");
 		return false;
