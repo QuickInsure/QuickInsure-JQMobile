@@ -1,29 +1,38 @@
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4">
         <div class="box">
-            <label for="carname">Car Name:</label>
-            <input type="text" name="carname" id="carname" value="" data-clear-btn="true" placeholder="Car Name" class="required">
-
-            <label for="registrationNum">Car Registration Number:</label>
-            <input type="text" name="registrationNum" id="registrationNum" value="" data-clear-btn="true" placeholder="Car Registration Number" class="required">
+            <div class="ui-field-contain">
+                <label for="carname">Car Name:</label>
+                <input type="text" name="carname" id="carname" value="" data-clear-btn="true" placeholder="Car Name" class="required">
+            </div>
+            <div class="ui-field-contain">
+                <label for="registrationNum">Car Registration Number:</label>
+                <input type="text" name="registrationNum" id="registrationNum" value="" data-clear-btn="true" placeholder="Car Registration Number" class="required">
+            </div>
         </div>
-
         <div class="box">
-            <label for="regYear" class="select">Year Of registration</label>
-            <select name="regYear" id="regYear">
-                <option value="2016">2016</option>
-                <option value="2015">2015</option>
-                <option value="2014">2014</option>
-                <option value="2013">2013</option>
-                <option value="2012">2012</option>
-            </select>
-
-            <label for="fuelType" class="select">Fuel Type</label>
-            <select name="fuelType" id="fuelType">
-                <option value="Petrol">Petrol</option>
-                <option value="Diesel">Diesel</option>
-                <option value="CNG">CNG</option>
-            </select>
+        <div class="ui-field-contain">
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>Year Of registration:</legend>
+                    <select name="regYear" id="regYear">
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                        <option value="2013">2013</option>
+                        <option value="2012">2012</option>
+                    </select>
+            </fieldset>
+        </div>
+        <div class="ui-field-contain">
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>Fuel Type</legend>
+                    <select name="fuelType" id="fuelType">
+                        <option value="Petrol">Petrol</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="CNG">CNG</option>
+                    </select>
+            </fieldset>
+        </div>
         </div>
         <br>
 <!--         <div data-role="rangeslider" data-track-theme="b" data-theme="a">
@@ -32,16 +41,18 @@
         </div> -->
         <br>
         <div class="box">
-        <div class="ui-field-contain">
+                <!-- <div class="box"> -->
+            <div class="ui-field-contain">
             <fieldset data-role="controlgroup" data-type="horizontal">
             <legend>No claim bonus:</legend>
             <!-- <label for="noClaimBonus">No Claim Bonus:</label> -->
-                <input type="radio" name="carQuoteNoclaim" id="carQuote_noclaim_yes" value="YES" checked="checked">
-                <label for="carQuote_noclaim_yes">YES</label>
-                <input type="radio" name="carQuoteNoclaim" id="carQuote_noclaim_no" value="NO">
-                <label for="carQuote_noclaim_no">NO</label>
+                <input type="radio" name="carQuoteNoclaim" id="noclaim_yes" value="YES" checked="checked">
+                <label for="noclaim_yes">YES</label>
+                <input type="radio" name="carQuoteNoclaim" id="noclaim_no" value="NO">
+                <label for="noclaim_no">NO</label>
             </fieldset>
             </div>
+        <!-- </div> -->
         </div>
     </div>
 </div>
