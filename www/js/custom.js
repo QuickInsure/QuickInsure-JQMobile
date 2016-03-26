@@ -230,29 +230,39 @@ function submitForm(dataObject, formData, formID) {
             else if(formID == 'carQuoteForm'){
                 alert("api for car quote")
                 if(response[0].code==200){
-                    alert(response[1].eamil_id+"<<my email");
-                     var premium = 100;
-                var tpPremium = 20;
+                    alert(response[1].email_id+"<<my email");
+                var premium = parseInt(response[1].premium);
+                var tpPremium = 1000;
                 var totalPremium=0;
                 var NCBVal = 0;
                 var NCB = $('input[name="carQuoteNoclaim"]:checked').val();
                 if(NCB == 'YES'){
-                   // alert("yes")
-                    NCBVal = 5;
+                    //alert("yes")
+                    NCBVal = 500;
                     totalPremium = (premium + tpPremium)- NCBVal;
+                    alert(totalPremium+" if yes")
                  //   alert(totalPremium)
                 }else{
-                 //   alert("no")
+                    //alert("no")
                     NCBVal = 0;
                     totalPremium = (premium + tpPremium)- NCBVal;
+                    alert(totalPremium+" if no")
                  //   alert(totalPremium);
                 }
                 
                 $( "#carQuoteDialog" ).on( "popupbeforeposition", function( event, ui ) {
-                    console.log(totalPremium+"><><><>")
-                   $( "p:first" ).text(parseInt(totalPremium)+" Rs"); 
-                } );
+                        //alert(totalPremium+"><><><>")
+                       $( "#bhenchod" ).text(totalPremium); 
+                       $("#quoteNCBValue").val(parseInt(totalPremium)); 
+                       $("#quoteTPValue").val(tpPremium)
+                       $("#quoteIDVValue").val(response[1].idv);
+                    });
             $("#carQuoteDialog").popup("open");
+            $( "#carQuoteDialog" ).on( "popupafterclose", function( event, ui ) {
+                    redirecturl = "#eapp"
+                    $.mobile.navigate(redirecturl); 
+                } );
+            return false;
                 }
             }
 
