@@ -131,10 +131,10 @@ function submitForm(dataObject, formData, formID) {
 	// 	$("#carQuoteDialog").popup("open");
 	// 	return false;
 	// }
-	else if (formID =="bikeQuoteForm" ){
-		$("#carQuoteDialog").popup("open");
-		return false;
-    }
+	// else if (formID =="bikeQuoteForm" ){
+	// 	$("#carQuoteDialog").popup("open");
+	// 	return false;
+ //    }
     /*else if (formID =="loginForm") {
         $.mobile.navigate(redirecturl); return false;
     }*/
