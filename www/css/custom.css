@@ -7,10 +7,22 @@
 }
 
 .bottomsheet {
-	z-index: 999;
+	z-index: 99999999;
 }
 
 .ui-input-btn {
 	background-color: #ff5722 !important;
     color: white !important;
+}
+
+.ui-bottom-sheet-link {
+    padding: 10px;
+}
+
+.zmd-2x {
+    font-size: 1.5em;
+}
+
+.ui-bottom-sheet-link strong {
+    font-size: 12px;
 }

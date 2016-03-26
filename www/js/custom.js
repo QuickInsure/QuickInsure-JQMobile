@@ -105,39 +105,29 @@ function showMessage(message, callback, title, buttonName) {
 }
 
 
-function renewPolicy(clickObject) {
+function renewPolicy(clickObject, renewalString) {
 	if (checkConnection()) {
 		submitForm(clickObject.data(), {}, "policyRenewal");
 	}
 	else {
-		window.plugins.socialsharing.shareViaSMS('Policy Renewal:\n'+clickObject.data('renewal'), '0612345678', null);
+		window.plugins.socialsharing.shareViaSMS(renewalString, '0612345678', null);
 	}
 }
 
 
 //Function to submit form to online server
 function submitForm(dataObject, formData, formID) {
+	$.mobile.loading("show", {
+		text: "",
+		textVisible: false,
+		theme: "b",
+		textonly: false,
+		html: ""
+    });
+
     var module = dataObject.module;
     var action = dataObject.action;
     var redirecturl = dataObject.redirecturl;
-
-    var values = {};
-    $.each($('#'+formID).serializeArray(), function(i, field) {
-        values[field.name] = field.value;
-        console.log(field.name+"<-->"+field.value)
-    });
-    
-	// if (formID =="carQuoteForm" ){
-	// 	$("#carQuoteDialog").popup("open");
-	// 	return false;
-	// }
-	// else if (formID =="bikeQuoteForm" ){
-	// 	$("#carQuoteDialog").popup("open");
-	// 	return false;
- //    }
-    /*else if (formID =="loginForm") {
-        $.mobile.navigate(redirecturl); return false;
-    }*/
     
     var request = new MFPRequest("/"+module+"/"+action, MFPRequest.POST);
 	request.setQueryParameters(formData);
@@ -156,9 +146,11 @@ function submitForm(dataObject, formData, formID) {
     				$("#iciciProfile").hide();
 
                     $.mobile.navigate(redirecturl);
+					$.mobile.loading("hide");
                 }
                 else if (response.status == "invalid") {
                 	showMessage("Invalid User!", null, null, null);
+                	$.mobile.loading("hide");
                 }
                 else {
                     if (response.code == 200) {
@@ -172,21 +164,22 @@ function submitForm(dataObject, formData, formID) {
 	    				$("#iciciProfile #product").html(response.policyData.product);
 	    				$("#iciciProfile #endDate").html(response.policyData.policy_end_date);
 	    				$("#iciciProfile #totalPremium").html(response.policyData.total_premium_amt);
-	    				$("#iciciProfile renew-button").html('data-renewal', renewalString);
 
 						$("#noniciciProfile").hide();
 	    				$("#iciciProfile").show();
                     	
 						//Code to implement policy renew functionality
 						$(".renew-button").off("click").on("click", function(){
-							renewPolicy($(this));
+							renewPolicy($(this), renewalString);
 						});
 
                     	$.mobile.navigate(redirecturl);
+                    	$.mobile.loading("hide");
                     }
                     else {
                         showMessage(response[0].description, null, null, null);
                         //showMessage(response[0].message, null, null, null);
+                        $.mobile.loading("hide");
                     }
                 }
             }
@@ -204,6 +197,7 @@ function submitForm(dataObject, formData, formID) {
                         'snippet': snippet
 					});
                 });
+                $.mobile.loading("hide");
             }
             else if (formID == "policyRenewal") {
             	if (response[0].code == 200) {
@@ -222,54 +216,52 @@ function submitForm(dataObject, formData, formID) {
 					$("#renewalDialog #rto").html(response[1].rto);
 					
 					$("#renewalDialog").popup("open");
+					$.mobile.loading("hide");
 					return false;
             	}
             }
             else if(formID == 'carQuoteForm'){
                 alert("api for car quote")
-                if(response[0].code==200){
-                    alert(response[1].email_id+"<<my email");
-                var premium = parseInt(response[1].premium);
-                var tpPremium = 1000;
-                var totalPremium=0;
-                var NCBVal = 0;
-                var NCB = $('input[name="carQuoteNoclaim"]:checked').val();
-                if(NCB == 'YES'){
-                    //alert("yes")
-                    NCBVal = 500;
-                    totalPremium = (premium + tpPremium)- NCBVal;
-                    alert(totalPremium+" if yes")
-                 //   alert(totalPremium)
-                }else{
-                    //alert("no")
-                    NCBVal = 0;
-                    totalPremium = (premium + tpPremium)- NCBVal;
-                    alert(totalPremium+" if no")
-                 //   alert(totalPremium);
-                }
+                if(response[0].code == 200){
+					alert(response[1].email_id+"<<my email");
+					var premium = parseInt(response[1].premium);
+					var tpPremium = 1000;
+					var totalPremium = 0;
+					var NCBVal = 0;
+					var NCB = $('input[name="carQuoteNoclaim"]:checked').val();
+					if(NCB == 'YES'){
+						NCBVal = 500;
+						totalPremium = (premium + tpPremium)- NCBVal;
+						alert(totalPremium+" if yes");
+					}
+					else {
+						NCBVal = 0;
+						totalPremium = (premium + tpPremium)- NCBVal;
+						alert(totalPremium+" if no");
+					}
                 
-                $( "#carQuoteDialog" ).on( "popupbeforeposition", function( event, ui ) {
-                        //alert(totalPremium+"><><><>")
-                       $( "#bhenchod" ).text(totalPremium); 
-                       $("#quoteNCBValue").val(parseInt(totalPremium)); 
-                       $("#quoteTPValue").val(tpPremium)
-                       $("#quoteIDVValue").val(response[1].idv);
-                    });
-            $("#carQuoteDialog").popup("open");
-            $( "#carQuoteDialog" ).on( "popupafterclose", function( event, ui ) {
-                    redirecturl = "#eapp"
-                    $.mobile.navigate(redirecturl); 
-                } );
-            return false;
+					$("#carQuoteDialog").on("popupbeforeposition", function(event, ui){
+						$("#bhenchod").text(totalPremium); 
+						$("#quoteNCBValue").val(parseInt(totalPremium)); 
+						$("#quoteTPValue").val(tpPremium)
+						$("#quoteIDVValue").val(response[1].idv);
+					});
+						("#carQuoteDialog").popup("open");
+					$( "#carQuoteDialog" ).on( "popupafterclose", function( event, ui ) {
+						redirecturl = "#eapp"
+                	});
+					$.mobile.navigate(redirecturl);
+            		$.mobile.loading("hide");
+            		return false;
                 }
             }
-
         }, 
         function (failureResponse){
         	alert(failureResponse);
             /*alert("errorCode :: " + failureResponse.errorCode);
             alert("status:: " + failureResponse.status);
             alert("errorDescription :: " + failureResponse.errorDescription);*/
+            $.mobile.loading("hide");
         }
     );
 
@@ -318,11 +310,6 @@ function getEapp(){
 //Equivalent to JQuery $(document).ready()
 $(document).on('pageinit', function() {
     FastClick.attach(document.body);
-
-    $(".car-list").on("click", function(){
-        console.log("fsdjfhsdjfs");
-    });
-
 
     /*-----------Code to validate each form and submit to online server if connected start-----------*/
     $.validator.addMethod("pwcheck", function(value) {
@@ -390,15 +377,6 @@ $(document).on('pageinit', function() {
 
 
     /*-----------Miscellaneous Events start-----------*/
-    //Code to add close event to exit buttons
-    if (navigator.userAgent.indexOf("OS X") != -1) {
-        $(".exit").hide();
-    }
-    $(".exit").click(function(){
-        navigator.app.exitApp();
-    });
-
-
 	$("li[data-tab='account']").click();
     $("li[data-tab='login']").click();
 

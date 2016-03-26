@@ -46,7 +46,7 @@
 
 		<div data-role="page" id="dashboard">
 			<div data-role="panel" id="bottomsheetDashboard" data-animate="false" data-position='bottom' data-display="overlay">
-				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
+				<nd2-include data-src="fragments/dashboard.bottom.html"></nd2-include>
 			</div>
 
 			<nd2-include data-src="fragments/quote.dialog.html"></nd2-include>
@@ -116,7 +116,7 @@
 
 						<div class="ui-grid-a">
 							<div class="ui-block-solo">
-								<button class='ui-btn-primary ui-btn-raised clr-primary waves-effect waves-button renew-button' data-renewal='' data-module='login' data-action='policyRenewal'>Renew</button>
+								<button class='ui-btn-primary ui-btn-raised clr-primary waves-effect waves-button renew-button' data-module='login' data-action='policyRenewal'>Renew</button>
 							</div>
 						</div>
 					</div>
@@ -139,8 +139,8 @@
 
 
 		<div data-role="page" id="map">
-			<div data-role="panel" id="bottomsheetMap" data-animate="false" data-position='bottom' data-display="overlay">
-				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
+			<div data-role="panel" id="bottomsheetMap" class="bottomsheet" data-animate="false" data-position='bottom' data-display="overlay">
+				<nd2-include data-src="fragments/map.bottom.html"></nd2-include>
 			</div>
 
 			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
@@ -149,7 +149,7 @@
 			</div>
 
 			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
-				<div id='map_canvas' style='width:100%;height:500px'>
+				<div id='map_canvas' style='width:100%;height:450px'>
 					<form id="mapForm" name="mapForm" data-ajax="false" data-module="login" data-action="getBranchATMGarage" data-redirecturl="#map">
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-4">
