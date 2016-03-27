@@ -153,6 +153,14 @@ module.exports = [
         "clobbers": [
             "plugin.google.maps"
         ]
+    },
+    {
+        "file": "plugins/de.sitewaerts.cordova.documentviewer/www/sitewaertsdocumentviewer.js",
+        "id": "de.sitewaerts.cordova.documentviewer.SitewaertsDocumentViewer",
+        "clobbers": [
+            "cordova.plugins.SitewaertsDocumentViewer",
+            "SitewaertsDocumentViewer"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -171,7 +179,8 @@ module.exports.metadata =
     "cordova-plugin-crosswalk-webview": "1.6.0",
     "ibm-mfp-core": "1.0.11",
     "cordova-plugin-console": "1.0.2",
-    "plugin.google.maps": "1.3.9"
+    "plugin.google.maps": "1.3.9",
+    "de.sitewaerts.cordova.documentviewer": "0.2.0"
 };
 // BOTTOM OF METADATA
 });

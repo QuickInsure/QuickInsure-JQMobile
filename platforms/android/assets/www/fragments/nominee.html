@@ -1,33 +1,25 @@
-<div class="row" id="nomineeDetails">
+<div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="box" id="nomineeName">
-            <div class="ui-field-contain">
-                <label for="nomineeFullName">Nominee Full Name:</label>
-                <input type="text" name="nomineeFullName" id="nomineeFullName" placeholder="Nominee Full Name" value="" required>
-            </div>
+        <div class="box">
+            <label for="nomineeFullName">Nominee Full Name:</label>
+            <input type="text" name="nomineeFullName" id="nomineeFullName" placeholder="Nominee Full Name" value="" class="required">
+
+            <label for="nomineeAge">Age:</label>
+            <input type="number" name="nomineeAge" id="nomineeAge" placeholder="Age" value="" class="required" minlength="2">
         </div>
 
-        <div class="box" id="age">
-            <div class="ui-field-contain">
-                <label for="nomineeAge">Text Input:</label>
-                <input type="number" name="nomineeAge" id="nomineeAge" placeholder="Age" value="" required minlength="2">
-            </div>
-        </div>
-        <div class="box" id="relation">
-        <div class="ui-field-contain">
-            <label for="select-native-1">Native select:</label>
-            <select name="nomineeRelation" id="nomineeRelation">
-                <option value="small">Father</option>
-                <option value="medium">Mother</option>
-                <option value="large">Wife</option>
-                <option value="small">Son</option>
-                <option value="medium">Daughter</option>
-                <option value="large">Brother</option>
-                <option value="large">Sister</option>
-                <option value="large">Other</option>
+        <div class="box">
+            <label for="nomineeRelation">Relation to Owner:</label>
+            <select name="nomineeRelation">
+                <option value="father">Father</option>
+                <option value="mother">Mother</option>
+                <option value="wife">Wife</option>
+                <option value="son">Son</option>
+                <option value="daughter">Daughter</option>
+                <option value="brother">Brother</option>
+                <option value="sister">Sister</option>
+                <option value="other">Other</option>
             </select>
         </div>
-        <br>
-        <br>
     </div>
 </div>

@@ -154,17 +154,18 @@ function submitForm(dataObject, formData, formID) {
                 }
                 else {
                     if (response.code == 200) {
-                        renewalString = "Policy Renewal:\nInsured:"+response.policyData.insured_name+"\nProduct:"+response.policyData.product+"\nMobile:"+response.policyData.mobile_no+"\nEmail:"+response.policyData.email_id+"\nExpiry:"+response.policyData.policy_end_date+"\nDOB:"+response.policyData.dob+"\nAddress:"+response.policyData.resident_add+","+response.policyData.state+","+response.policyData.pincode+"\nRenew For:1 year";
-
 	    				$("#iciciProfile #custID").html(response.userData.custid);
 	    				$("#iciciProfile #accountNo").html(response.userData.accountno);
 	    				$("#iciciProfile #accountType").html(response.userData.accounttype);
 	    				$("#iciciProfile #balance").html(response.userData.balance);
 	    				$("#iciciProfile #mobileNo").html(response.userData.mobileno);
-	    				$("#iciciProfile #product").html(response.policyData.product);
-	    				$("#iciciProfile #endDate").html(response.policyData.policy_end_date);
-	    				$("#iciciProfile #totalPremium").html(response.policyData.total_premium_amt);
 
+	    				if (response.policyData != undefined) {
+		    				$("#iciciProfile #product").html(response.policyData.product);
+		    				$("#iciciProfile #endDate").html(response.policyData.policy_end_date);
+		    				$("#iciciProfile #totalPremium").html(response.policyData.total_premium_amt);
+		    				renewalString = "Policy Renewal:\nInsured:"+response.policyData.insured_name+"\nProduct:"+response.policyData.product+"\nMobile:"+response.policyData.mobile_no+"\nEmail:"+response.policyData.email_id+"\nExpiry:"+response.policyData.policy_end_date+"\nDOB:"+response.policyData.dob+"\nAddress:"+response.policyData.resident_add+","+response.policyData.state+","+response.policyData.pincode+"\nRenew For:1 year";
+		    			}
 						$("#noniciciProfile").hide();
 	    				$("#iciciProfile").show();
                     	
@@ -200,7 +201,7 @@ function submitForm(dataObject, formData, formID) {
                 $.mobile.loading("hide");
             }
             else if (formID == "policyRenewal") {
-            	if (response[0].code == 200) {
+            	if (response[0] != undefined && response[0].code == 200) {
 					$("#renewalDialog #policyNoOld").html(response[1].policy_no);
 					$("#renewalDialog #policyNoNew").html(response[1].new_policy_no);
 					$("#renewalDialog #duration").html(response[1].policy_st_date + " to " + response[1].policy_end_date);
@@ -219,36 +220,41 @@ function submitForm(dataObject, formData, formID) {
 					$.mobile.loading("hide");
 					return false;
             	}
+            	else {
+            		renewalString = "Policy Renewal:\nInsured:John Smith\nProduct:Hyundai Creta\nMobile:9999999999\nEmail:john.smith@xyz.com\nExpiry:01-06-2015\nDOB:12-12-1990\nAddress:Ram Mahal,Mumbai,Maharashtra,400081\nRenew For:1 year";
+            		window.plugins.socialsharing.shareViaSMS(renewalString, '0612345678', null);
+					$.mobile.loading("hide");
+					return false;
+            	}
             }
-            else if(formID == 'carQuoteForm'){
-                if(response[0].code == 200){
-					var premium = parseInt(response[1].premium);
-					var tpPremium = 1000;
-					var totalPremium = 0;
-					var NCBVal = 0;
-					var NCB = formData.carQuoteNoclaim;
-					if(NCB == 'YES'){
-						NCBVal = 500;
-						totalPremium = (premium + tpPremium) - NCBVal;
-					}
-					else {
-						totalPremium = (premium + tpPremium) - NCBVal;
-					}
-                
-					// $("#carQuoteDialog").on("popupbeforeposition", function(event, ui){
-					$("#carQuoteDialog #premium").html(totalPremium); 
-					$("#carQuoteDialog #quoteNCBValue").html(parseInt(totalPremium)); 
-					$("#carQuoteDialog #quoteTPValue").html(tpPremium)
-					$("#carQuoteDialog #quoteIDVValue").html(response[1].idv);
-					// });
-					$("#carQuoteDialog").popup("open");
-					/*$("#carQuoteDialog").on("popupafterclose", function(event, ui) {
-						redirecturl = "#eapp"
-                	});*/
-            		$.mobile.loading("hide");
-					//$.mobile.navigate(redirecturl);
-            		return false;
-                }
+            else if(formID == 'carQuoteForm' || formID == 'bikeQuoteForm'){
+            	var premium = 2000;
+				var idv = 60000;
+				var tpPremium = 4531;
+				var totalPremium = 0;
+				var NCBVal = 0;
+				var NCB = formData.carQuoteNoclaim;
+                if(response[0] != undefined && response[0].code == 200){
+					premium = parseInt(response[1].premium);
+					idv = response[1].idv;
+				}
+				if(NCB == 'YES'){
+					NCBVal = 500;
+					totalPremium = (premium + tpPremium) - NCBVal;
+				}
+				else {
+					totalPremium = (premium + tpPremium) - NCBVal;
+				}
+
+				$("#carQuoteDialog #premium").html(totalPremium);
+				$("#eapp #policyPremium").val(totalPremium); 
+				$("#carQuoteDialog #quoteNCBValue").html(NCBVal); 
+				$("#carQuoteDialog #quoteTPValue").html(tpPremium)
+				$("#carQuoteDialog #quoteIDVValue").html(idv);
+
+				$("#carQuoteDialog").popup("open");
+        		$.mobile.loading("hide");
+        		return false;
             }
         }, 
         function (failureResponse){
@@ -293,15 +299,6 @@ $(window).on('hashchange', function() {
     }
 });
 
-function getEapp(){
-	//alert("going to eapp")
-	redirecturl = "#eapp"
-	console.log("fffff"+redirecturl)
-	//location.href="www/fragments/eapp.html"
-	$.mobile.navigate(redirecturl); 
-	//event.preventDefault;
-	return false;
-}
 
 //Equivalent to JQuery $(document).ready()
 $(document).on('pageinit', function() {
@@ -375,9 +372,7 @@ $(document).on('pageinit', function() {
     /*-----------Miscellaneous Events start-----------*/
 	$("li[data-tab='account']").click();
     $("li[data-tab='login']").click();
-
-    var carQuote = "420102";
-    $(".quotePrice").text(carQuote);
+    $("li[data-tab='vehicle']").click();
 
     $("input[name='locate']").off("change").on("change", function(){
 		$("#mapForm").submit();

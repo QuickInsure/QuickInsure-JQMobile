@@ -66,6 +66,9 @@
     <feature name="Geocoder">
         <param name="android-package" value="plugin.google.maps.MyGeocoder" />
     </feature>
+    <feature name="SitewaertsDocumentViewer">
+        <param name="android-package" value="de.sitewaerts.cordova.documentviewer.DocumentViewerPlugin" />
+    </feature>
     <allow-intent href="market:*" />
     <preference name="android-minSdkVersion" value="15" />
     <icon density="ldpi" src="res/android/icon/ldpi.png" />

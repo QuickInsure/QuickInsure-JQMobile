@@ -1,12 +1,11 @@
- <style>
-  p {
-    color: #FF704C;
-    /*margin: 8px;*/
-  }
-  b {
-    color: #FF704C;
-  }
-  </style>
+<style>
+p {
+	color: #FF704C;
+}
+b {
+	color: #FF704C;
+}
+</style>
 
 <div data-role="popup" id="carQuoteDialog" style="min-height:90%;" data-history= "false">
     <div data-role="header" data-theme="b" role="banner" class="ui-header ui-bar-b">
@@ -18,19 +17,20 @@
     		<div class="ui-block-a"><b>Insured Declared Value(IDV):</b></div>
     		<div class="ui-block-b" id="quoteIDVValue"></div>
 
-    		<div class="ui-block-a">NCB Value:</div>
+    		<div class="ui-block-a"><b>NCB Value:</b></div>
     		<div class="ui-block-b" id="quoteNCBValue"></div>
 
-    		<div class="ui-block-a">TP Premium:</div>
+    		<div class="ui-block-a"><b>TP Premium:</b></div>
     		<div class="ui-block-b" id="quoteTPValue"></div>
 		
+			<div class="ui-block-solo"><h3><b>Total Premium:</b></h3></div>
     		<div class="ui-block-solo"><p style="font-size: 100px" id="premium"></p></div>
         
     		<div class="ui-block-a">
-    			<a href= "#eapp" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-a">Buy Policy</a>
+    			<a href= "#eapp" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-btn-primary ui-btn-raised clr-primary waves-effect waves-button">Buy</a>
     		</div>
     		<div class="ui-block-b">
-    			<a href="#" data-role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-left" data-rel="back">Close</a>		
+    			<a href="#" data-role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-btn-primary ui-btn-raised clr-primary waves-effect waves-button" data-rel="back">Close</a>		
     		</div>
     	</div>	
     </div>

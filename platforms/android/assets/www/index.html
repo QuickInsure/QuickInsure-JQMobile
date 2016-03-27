@@ -105,13 +105,13 @@
 							<div class="ui-block-solo"><h3><b>Policies:</b></h3></div>
 							
 							<div class="ui-block-a">Product:</div>
-							<div class="ui-block-b" id="product"></div>
+							<div class="ui-block-b" id="product">Hyundai Creta</div>
 							
 							<div class="ui-block-a">Policy End Date:</div>
-							<div class="ui-block-b" id="endDate"></div>
+							<div class="ui-block-b" id="endDate">01-06-2015</div>
 							
 							<div class="ui-block-a">Total Premium:</div>
-							<div class="ui-block-b" id="totalPremium"></div>
+							<div class="ui-block-b" id="totalPremium">6031</div>
 						</div>	
 
 						<div class="ui-grid-a">
@@ -193,53 +193,36 @@
 				<nd2-include data-src="fragments/bottom.sheet.html"></nd2-include>
 			</div>
 
-			<nd2-include data-src="fragments/quote.dialog.html"></nd2-include>
-
 			<div data-role="header" data-position="fixed" class="wow fadeInDown" data-wow-delay="0.2s">
 				<a href="#bottomsheetEAPP" class="ui-btn ui-btn-right wow fadeIn" data-wow-delay='1.2s'><i class="zmdi zmdi-more-vert"></i></a>
 				<h1 class="wow fadeIn" data-wow-delay='0.4s'>QuickInsure</h1>
 
 				<ul data-role="nd2tabs" data-swipe="true">
-					<li data-tab="account" data-tab-active="true">Vehicle Details</li>
-					<li data-tab="discount">Discounts/Additional Covers</li>
-					<li data-tab="owner">Owner Details</li>
-					<li data-tab="nominee">Nominee Details</li>
-					<li data-tab="other">Final Illustration</li>
-					<li data-tab="payment">Payment details</li>	
+					<li data-tab="vehicle" data-tab-active="true">Vehicle</li>
+					<li data-tab="owner">Owner</li>
+					<li data-tab="nominee">Nominee</li>
+					<li data-tab="payment">Payment</li>	
 				</ul>
 			</div>
 
 			<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
-				
-				<div data-role="nd2tab" data-tab="account">
-					<form id="vehicalForm" name="vehicalForm" data-ajax="false" data-module="vehical" data-action="getVeicalDetails" data-transition="pop">
-						<nd2-include data-src="fragments/vehical.html"></nd2-include>
-			        </form>
-				</div>
+				<form id="eappForm" name="eappForm" data-ajax="false" data-module="" data-action="" data-transition="pop">
+					<div data-role="nd2tab" data-tab="vehicle">
+						<nd2-include data-src="fragments/vehicle.html"></nd2-include>
+					</div>
 
-				<div data-role="nd2tab" data-tab="discount">
-					<form id="discountForm" name="discountForm" data-ajax="false" data-module="discount" data-action="getDiscount" data-transition="pop">
-						<nd2-include data-src="fragments/discount.html"></nd2-include>
-			        </form>
-				</div>
-
-				<div data-role="nd2tab" data-tab="owner">
-					<form id="ownerForm" name="ownerForm" data-ajax="false" data-module="owner" data-action="getOwnerDetails" data-transition="pop">
+					<div data-role="nd2tab" data-tab="owner">
 						<nd2-include data-src="fragments/owner.html"></nd2-include>
-					</form>
-				</div>
-				<div data-role="nd2tab" data-tab="nominee">
-					<form id="nomineeForm" name="nomineeForm" data-ajax="false" data-module="nominee" data-action="getNomineeDetails" data-transition="pop">
+					</div>
+				
+					<div data-role="nd2tab" data-tab="nominee">
 						<nd2-include data-src="fragments/nominee.html"></nd2-include>
-					</form>
-				</div>
+					</div>
 
-				<div data-role="nd2tab" data-tab="payment">
-					<form id="paymentForm" name="paymentForm" data-ajax="false" data-module="payment" data-action="getPaymentdetails" data-transition="pop">
+					<div data-role="nd2tab" data-tab="payment">
 						<nd2-include data-src="fragments/payment.html"></nd2-include>
-					</form>
-				</div>
-
+					</div>
+				</form>
 			</div>
 		</div>
 		<!--eapp ends here-->

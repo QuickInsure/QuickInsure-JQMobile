@@ -103,6 +103,10 @@
                         {
                             "xml": "<feature name=\"Geocoder\"><param name=\"android-package\" value=\"plugin.google.maps.MyGeocoder\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SitewaertsDocumentViewer\"><param name=\"android-package\" value=\"de.sitewaerts.cordova.documentviewer.DocumentViewerPlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -120,6 +124,10 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
                             "count": 1
                         }
                     ],
@@ -213,6 +221,9 @@
         },
         "plugin.google.maps": {
             "API_KEY_FOR_ANDROID": "AIzaSyBXkgaQA9KIixtw8VmhdaQGBG2RGFKlBC8",
+            "PACKAGE_NAME": "com.appathon.quickinsure"
+        },
+        "de.sitewaerts.cordova.documentviewer": {
             "PACKAGE_NAME": "com.appathon.quickinsure"
         }
     },
@@ -371,6 +382,14 @@
             "clobbers": [
                 "plugin.google.maps"
             ]
+        },
+        {
+            "file": "plugins/de.sitewaerts.cordova.documentviewer/www/sitewaertsdocumentviewer.js",
+            "id": "de.sitewaerts.cordova.documentviewer.SitewaertsDocumentViewer",
+            "clobbers": [
+                "cordova.plugins.SitewaertsDocumentViewer",
+                "SitewaertsDocumentViewer"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -387,6 +406,7 @@
         "cordova-plugin-crosswalk-webview": "1.6.0",
         "ibm-mfp-core": "1.0.11",
         "cordova-plugin-console": "1.0.2",
-        "plugin.google.maps": "1.3.9"
+        "plugin.google.maps": "1.3.9",
+        "de.sitewaerts.cordova.documentviewer": "0.2.0"
     }
 }

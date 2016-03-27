@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="box">
+            <label for="carRegistrationNum">Car Registration Number:</label>
+            <input type="text" name="carRegistrationNum" id="carRegistrationNum" value="" data-clear-btn="true" placeholder="Car Registration Number" class="required"/>
+        </div>
+
+        <div class="box">    
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>Previous Year Policy Insurer:</legend>
+                <select name="prevPolicyInsurer" id="prevPolicyInsurer">
+                    <option value="bharatiaxa">Bharti AXA</option>
+                    <option value="bajajallianz">BAJAJ ALLIANZ</option>
+                    <option value="hdfc">HDFC</option>
+                    <option value="icicilombard">ICICI Lombard</option>
+                </select>
+            </fieldset>
+        </div> 
+
+        <div class="box">
+            <label for="previousPolicyNumber">Previous Policy Number:</label>
+            <input type="text" name="previousPolicyNumber" id="previousPolicyNumber" value="" data-clear-btn="true" placeholder="Previous Policy Number" class="required"/>
+
+            <label for="carEngineNumber">Car Engine Number:</label>
+            <input type="text" name="carEngineNumber" id="carEngineNumber" value="" data-clear-btn="true" placeholder="Car Engine Number" class="required" minlength="7" />
+
+            <label for="carChasisNumber">Car Chasis Number:</label>
+            <input type="text" name="carChasisNumber" id="carChasisNumber" value="" data-clear-btn="true" placeholder="Car Chasis Number" class="required" minlength="7" />
+        </div>
+
+        <div class="box" >
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>Insurance From:</legend>
+                <select name="insuranceStartDate" id="insuranceStartDate">
+                </select>
+                <select name="insuranceStartMonth" id="insuranceStartMonth">
+                </select>
+                <select name="insuranceStartYear" id="insuranceStartYear">
+                </select>
+            </fieldset>
+        </div>
+
+        <div class="box">
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>Insurance To:</legend>
+                <select name="insuranceEndDate" id="insuranceEndDate">
+                </select>
+                <select name="insuranceEndMonth" id="insuranceEndMonth">
+                </select>
+                <select name="insuranceEndYear" id="insuranceEndYear">
+                </select>
+            </fieldset>
+        </div>
+
+        <div class="box">
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>No claim bonus:</legend>
+                <input type="radio" name="noclaim" id="noclaim_yes" value="YES" checked="checked">
+                <label for="noclaim_yes">YES</label>
+                <input type="radio" name="noclaim" id="noclaim_no" value="NO">
+                <label for="noclaim_no">NO</label>
+            </fieldset>
+        </div>
+
+        <div class="box">
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>Additional Deductibles:</legend>
+                <input type="radio" name="deduct" id="noclaim_yes2" value="YES" checked="checked">
+                <label for="noclaim_yes2">YES</label>
+                <input type="radio" name="deduct" id="noclaim_no2" value="NO">
+                <label for="noclaim_no2">NO</label>
+            </fieldset>
+        </div>
+
+        <div class="box">
+            <fieldset data-role="controlgroup">
+                <legend>Additional Covers:</legend>
+                <input type="checkbox" name="roadSideAssistance" id="roadSideAssistance">
+                <label for="roadSideAssistance">24x7 Roadside Assistance</label>
+                <input type="checkbox" name="NCBProtection" id="NCBProtection">
+                <label for="NCBProtection">NCB Protection</label>
+                <input type="checkbox" name="driverCover" id="driverCover">
+                <label for="driverCover">Driver Cover</label>
+                <input type="checkbox" name="passengeCover" id="passengeCover">
+                <label for="passengeCover">Passenger Cover</label>
+                <input type="checkbox" name="engineProtection" id="driverCover">
+                <label for="driverCover">Engine Protector</label>
+                <input type="checkbox" name="accessories" id="accessories">
+                <label for="accessories">Accessories</label>
+                <input type="checkbox" name="invoice" id="invoice">
+                <label for="invoice">Invoice Cover</label>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var max = 12;
+    var montharray=['MONTH','JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST','SEPTEMBER','OCTOBER', 'NOVEMBER','DECEMBER']
+
+    for (var i = 0; i<=max; i++){
+        $('#insuranceStartMonth, #insuranceEndMonth').append($('<option>', {
+            value: i,
+            text: montharray[i]
+        }));
+    }
+    for (var i = 1; i<=31; i++){
+        $('#insuranceStartDate, #insuranceEndDate').append($('<option>', {
+            value: i,
+            text: i
+        }));
+    }
+
+    for (var i = 1990; i<=2016; i++){
+        $('#insuranceStartYear, #insuranceEndYear').append($('<option>', {
+            value: i,
+            text: i
+        }));
+    }
+</script>
