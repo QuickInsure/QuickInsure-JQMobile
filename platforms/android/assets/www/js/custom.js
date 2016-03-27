@@ -357,7 +357,14 @@ $(document).on('pageinit', function() {
                             $(this).val(dateArray[2]+"-"+dateArray[0]+"-"+dateArray[1]);
                         }
                     });
-                    submitForm($(form).data(), $(form).serializeObject(), $(form).prop("id"));
+
+				    if($(form).prop("id") == 'eappForm') {
+				    	$("#successDialog").popup("open");
+				    	$.mobile.loading("hide");
+				    }
+				    else {
+                    	submitForm($(form).data(), $(form).serializeObject(), $(form).prop("id"));
+                    }
                 }
                 else {
                     showMessage(networkErrorMessage, null, null, null);
