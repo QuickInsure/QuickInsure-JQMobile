@@ -65,29 +65,29 @@
         <div class="box">
             <fieldset data-role="controlgroup" data-type="horizontal">
                 <legend>Additional Deductibles:</legend>
-                <input type="radio" name="deduct" id="noclaim_yes2" value="YES" checked="checked">
+                <input type="radio" name="deduct" id="noclaim_yes2" value="YES">
                 <label for="noclaim_yes2">YES</label>
-                <input type="radio" name="deduct" id="noclaim_no2" value="NO">
+                <input type="radio" name="deduct" id="noclaim_no2" value="NO" checked="checked">
                 <label for="noclaim_no2">NO</label>
             </fieldset>
         </div>
 
-        <div class="box">
+        <div class="box" id='addl_cov'>
             <fieldset data-role="controlgroup">
                 <legend>Additional Covers:</legend>
-                <input type="checkbox" name="roadSideAssistance" id="roadSideAssistance">
+                <input type="checkbox" name="addlcover" value="roadSideAssistance" id="roadSideAssistance">
                 <label for="roadSideAssistance">24x7 Roadside Assistance</label>
-                <input type="checkbox" name="NCBProtection" id="NCBProtection">
+                <input type="checkbox" name="addlcover" value="NCBProtection" id="NCBProtection">
                 <label for="NCBProtection">NCB Protection</label>
-                <input type="checkbox" name="driverCover" id="driverCover">
+                <input type="checkbox" name="addlcover" value="driverCover" id="driverCover">
                 <label for="driverCover">Driver Cover</label>
-                <input type="checkbox" name="passengeCover" id="passengeCover">
+                <input type="checkbox" name="addlcover" value="passengeCover" id="passengeCover">
                 <label for="passengeCover">Passenger Cover</label>
-                <input type="checkbox" name="engineProtection" id="driverCover">
+                <input type="checkbox" name="addlcover" value="engineProtection" id="driverCover">
                 <label for="driverCover">Engine Protector</label>
-                <input type="checkbox" name="accessories" id="accessories">
+                <input type="checkbox" name="addlcover" value="accessories" id="accessories">
                 <label for="accessories">Accessories</label>
-                <input type="checkbox" name="invoice" id="invoice">
+                <input type="checkbox" name="addlcover" value="invoice" id="invoice">
                 <label for="invoice">Invoice Cover</label>
             </fieldset>
         </div>
@@ -95,6 +95,28 @@
 </div>
 
 <script type="text/javascript">
+$(document).ready(function(){
+    if($("input[name='deduct']:checked").val() == 'YES') {
+        $("#addl_cov").show();
+    }
+    else {
+        $("#addl_cov").hide();
+    }
+    $("input[name='deduct']").change(function(){
+        if ($("input[name='deduct']:checked").val() == 'YES') {
+            $("#addl_cov").show();
+        }
+        else {
+            $("#addl_cov").hide();
+            $("input[name='addlcover']").attr("checked",false).checkboxradio("refresh").change();
+        }
+    });
+
+    $("input[name='addlcover']").change(function(){
+        newPremiumValue = parseInt($("#eapp #policyPremiumOG").val()) + ($("input[name='addlcover']:checked").length * 100);
+        $("#eapp #policyPremium").val(newPremiumValue);
+    });
+
     var max = 12;
     var montharray=['MONTH','JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST','SEPTEMBER','OCTOBER', 'NOVEMBER','DECEMBER']
 
@@ -117,4 +139,5 @@
             text: i
         }));
     }
+});
 </script>

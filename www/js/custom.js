@@ -248,6 +248,7 @@ function submitForm(dataObject, formData, formID) {
 
 				$("#carQuoteDialog #premium").html(totalPremium);
 				$("#eapp #policyPremium").val(totalPremium); 
+				$("#eapp #policyPremiumOG").val(totalPremium); 
 				$("#carQuoteDialog #quoteNCBValue").html(NCBVal); 
 				$("#carQuoteDialog #quoteTPValue").html(tpPremium)
 				$("#carQuoteDialog #quoteIDVValue").html(idv);
