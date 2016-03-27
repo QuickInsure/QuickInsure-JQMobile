@@ -390,5 +390,30 @@ $(document).on('pageinit', function() {
 		var div = document.getElementById('map_canvas');
         map.setDiv(div);
     });
+
+
+
+    var max = 12;
+    var montharray=['MONTH','JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST','SEPTEMBER','OCTOBER', 'NOVEMBER','DECEMBER']
+
+    for (var i = 0; i<=max; i++){
+        $('#paymentMonth').append($('<option>', {
+            value: i,
+            text: montharray[i]
+        }));
+    }
+    for (var i = 1; i<=31; i++){
+        $('#paymentDate').append($('<option>', {
+            value: i,
+            text: i
+        }));
+    }
+
+    for (var i = 1990; i<=2020; i++){
+        $('#paymentYear').append($('<option>', {
+            value: i,
+            text: i
+        }));
+    }
     /*-----------Miscellaneous Events end-----------*/
 });
